@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?selectableItemBackground"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/std_margin"
+    android:paddingTop="@dimen/std_margin"
+    android:paddingLeft="@dimen/keyline_1"
+    android:paddingRight="@dimen/keyline_1"
+    >
+
+    <TextView
+        android:id="@+id/teacher_name"
+        style="@style/Widget.GrSUSchedule.Teacher.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Mr. Smith"
+        />
+
+    <TextView
+        android:id="@+id/teacher_post"
+        style="@style/Widget.GrSUSchedule.Teacher.Post"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Professor"
+        />
+
+</LinearLayout>

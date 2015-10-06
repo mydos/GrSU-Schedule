@@ -1,0 +1,26 @@
+<resources>
+
+    <style name="Base.V7.Theme.GrSUSchedule" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primaryDark</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="preferenceTheme">@style/ThemeOverlay.Preference</item>
+        <item name="shadowDrawable">@drawable/bottom_shadow</item>
+        <item name="minHorizontalSpace">@dimen/margin_8</item>
+        <item name="edgeeffect_color">@color/primary</item>
+        <item name="matProg_barColor">@color/accent</item>
+        <item name="matProg_fillRadius">true</item>
+        <item name="android:overScrollMode">ifContentScrolls</item>
+    </style>
+
+    <style name="Base.Theme.GrSUSchedule" parent="Base.V7.Theme.GrSUSchedule">
+        <item name="shadowVisible">true</item>
+    </style>
+
+    <style name="Theme.GrSUSchedule" parent="Base.Theme.GrSUSchedule"/>
+
+    <style name="ThemeOverlay.GrSUSchedule.AppBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="ThemeOverlay.GrSUSchedule.Popup" parent="ThemeOverlay.AppCompat.Light"/>
+
+</resources>

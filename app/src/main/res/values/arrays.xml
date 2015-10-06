@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="courses_title">
+        <item>1 курс</item>
+        <item>2 курс</item>
+        <item>3 курс</item>
+        <item>4 курс</item>
+        <item>5 курс</item>
+    </string-array>
+
+    <string-array name="pref_app_mode_entries">
+        <item>@string/app_mode_student</item>
+        <item>@string/app_mode_teacher</item>
+    </string-array>
+
+    <string-array name="pref_app_mode_entries_values">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+</resources>

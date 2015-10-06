@@ -1,0 +1,32 @@
+buildscript {
+    ext.kotlinVersion = '0.14.449'
+
+    repositories {
+        jcenter()
+        maven { url 'http://oss.sonatype.org/content/repositories/snapshots' }
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:1.4.0-beta6'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}"
+    }
+}
+
+ext {
+    supportLibraryVersion = '23.0.1'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.7'
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        maven { url 'http://oss.sonatype.org/content/repositories/snapshots' }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

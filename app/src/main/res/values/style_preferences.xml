@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ThemeOverlay.Preference" parent="PreferenceThemeOverlay">
+        <item name="preferenceScreenStyle">@style/Preference.Schedule.PreferenceScreen</item>
+        <item name="preferenceFragmentStyle">@style/Preference.Schedule.Fragment</item>
+        <item name="preferenceCategoryStyle">@style/Preference.Schedule.Category</item>
+        <item name="preferenceStyle">@style/Preference.Schedule</item>
+        <item name="preferenceInformationStyle">@style/Preference.Schedule.Information</item>
+        <item name="checkBoxPreferenceStyle">@style/Preference.Schedule.CheckBox</item>
+        <item name="switchPreferenceCompatStyle">@style/Preference.Schedule.SwitchPreferenceCompat</item>
+        <item name="dialogPreferenceStyle">@style/Preference.Schedule.DialogPreference</item>
+        <item name="editTextPreferenceStyle">@style/Preference.Schedule.DialogPreference.EditTextPreference</item>
+        <item name="preferenceFragmentListStyle">@style/Preference.Schedule.Fragment</item>
+    </style>
+
+    <style name="Preference.Schedule.DialogPreference">
+        <item name="positiveButtonText">@android:string/ok</item>
+        <item name="negativeButtonText">@android:string/cancel</item>
+    </style>
+
+    <style name="Preference.Schedule.DialogPreference.EditTextPreference">
+        <item name="dialogLayout">@layout/preference_dialog_edittext</item>
+    </style>
+
+    <style name="Preference.Schedule.SwitchPreferenceCompat">
+        <item name="widgetLayout">@layout/preference_widget_switch_compat</item>
+        <item name="switchTextOn">@string/v7_preference_on</item>
+        <item name="switchTextOff">@string/v7_preference_off</item>
+    </style>
+
+    <style name="Preference.Schedule.Category">
+        <item name="layout">@layout/preference_category</item>
+        <item name="shouldDisableView">false</item>
+        <item name="selectable">false</item>
+    </style>
+
+    <style name="Preference.Schedule.Information">
+        <item name="layout">@layout/preference_information</item>
+        <item name="enabled">false</item>
+        <item name="shouldDisableView">false</item>
+    </style>
+
+    <style name="Preference.Schedule">
+        <item name="layout">@layout/support_preference</item>
+    </style>
+
+    <style name="Preference.Schedule.PreferenceScreen"/>
+
+    <style name="Preference.Schedule.CheckBox">
+        <item name="widgetLayout">@layout/preference_widget_checkbox</item>
+    </style>
+
+    <style name="Preference.Schedule.Fragment" parent="PreferenceFragment">
+        <item name="android:paddingLeft">@dimen/margin_16</item>
+        <item name="android:paddingRight">@dimen/margin_16</item>
+    </style>
+
+</resources>

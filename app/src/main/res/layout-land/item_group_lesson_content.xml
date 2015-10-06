@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    style="@style/Widget.GrSUSchedule.LessonContent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:ignore="RtlHardcoded,RtlSymmetry"
+    >
+
+    <by.kirich1409.grsuschedule.widget.RowLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/lesson_type"
+                style="@style/Widget.GrSUSchedule.Lesson.Type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="type"
+                />
+
+            <TextView
+                android:id="@+id/lesson_title"
+                style="@style/Widget.GrSUSchedule.Lesson.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Lesson name"
+                />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/lesson_subgroup"
+            style="@style/Widget.GrSUSchedule.Lesson.Subgroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:text="Subgroup"
+            tools:visibility="visible"
+            />
+    </by.kirich1409.grsuschedule.widget.RowLayout>
+
+    <by.kirich1409.grsuschedule.widget.RowLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:id="@+id/lesson_teacher"
+            style="@style/Widget.GrSUSchedule.Lesson.Teacher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Teacher"
+            />
+
+        <TextView
+            android:id="@+id/lesson_place"
+            style="@style/Widget.GrSUSchedule.Lesson.Place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Place"
+            />
+    </by.kirich1409.grsuschedule.widget.RowLayout>
+</LinearLayout>

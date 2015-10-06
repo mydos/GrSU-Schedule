@@ -1,0 +1,10 @@
+<resources>
+
+    <style name="Base.V21.Theme.GrSUSchedule" parent="Base.V7.Theme.GrSUSchedule">
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    </style>
+
+    <style name="Base.Theme.GrSUSchedule" parent="Base.V21.Theme.GrSUSchedule">
+        <item name="shadowVisible">false</item>
+    </style>
+</resources>

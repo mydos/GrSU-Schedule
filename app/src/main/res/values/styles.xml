@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Widget.GrSUSchedule" parent=""/>
+
+    <style name="Base.V7.Widget.GrSUSchedule.Toolbar" parent="Widget.AppCompat.Toolbar">
+        <item name="android:id">@id/toolbar</item>
+        <item name="popupTheme">@style/ThemeOverlay.GrSUSchedule.Popup</item>
+        <item name="theme">@style/ThemeOverlay.GrSUSchedule.AppBar</item>
+        <item name="android:background">?colorPrimary</item>
+        <item name="android:minHeight">?actionBarSize</item>
+    </style>
+
+    <style name="Base.Widget.GrSUSchedule.Toolbar" parent="Base.V7.Widget.GrSUSchedule.Toolbar"/>
+
+    <style name="Widget.GrSUSchedule.Toolbar" parent="Base.Widget.GrSUSchedule.Toolbar"/>
+
+    <style name="Widget.GrSUSchedule.DayHeader">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Title.Inverse</item>
+        <item name="android:paddingBottom">@dimen/std_margin</item>
+        <item name="android:paddingTop">@dimen/std_margin</item>
+        <item name="android:paddingLeft">@dimen/keyline_1</item>
+        <item name="android:paddingRight">@dimen/keyline_1</item>
+        <item name="android:background">@android:color/darker_gray</item>
+    </style>
+
+    <style name="Widget.GrSUSchedule.FreeTime">
+        <item name="android:paddingBottom">@dimen/std_margin</item>
+        <item name="android:paddingTop">@dimen/std_margin</item>
+        <item name="android:paddingLeft">@dimen/keyline_1</item>
+        <item name="android:paddingRight">@dimen/keyline_1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:minHeight">?listPreferredItemHeight</item>
+        <item name="android:background">@android:color/darker_gray</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Subhead.Inverse</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
+    <style name="Widget.GrSUSchedule.Lesson"/>
+
+    <style name="Widget.GrSUSchedule.Lesson.TimeDivider">
+        <item name="android:background">@android:color/black</item>
+    </style>
+
+    <style name="Widget.GrSUSchedule.Lesson.Time">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
+        <item name="android:textSize">@dimen/lesson_time_text_size</item>
+        <item name="android:padding">@dimen/std_margin</item>
+        <item name="android:gravity">center_horizontal|center_vertical</item>
+    </style>
+
+    <style name="Widget.GrSUSchedule.Lesson.Type">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Caption</item>
+        <item name="android:textColor">?android:textColorSecondary</item>
+    </style>
+
+    <style name="Widget.GrSUSchedule.LessonContent">
+        <item name="android:paddingRight">@dimen/margin_8</item>
+        <item name="android:paddingLeft">@dimen/margin_8</item>
+        <item name="android:paddingTop">@dimen/std_margin</item>
+        <item name="android:paddingBottom">@dimen/std_margin</item>
+    </style>
+
+    <style name="Widget.GrSUSchedule.Lesson.Title">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Subhead</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="Widget.GrSUSchedule.Lesson.Place"/>
+
+    <style name="Widget.GrSUSchedule.Lesson.Subgroup"/>
+
+    <style name="Widget.GrSUSchedule.Lesson.Teacher"/>
+
+    <style name="Widget.GrSUSchedule.Lesson.Groups"/>
+
+    <style name="Widget.GrSUSchedule.Teacher"/>
+
+    <style name="Widget.GrSUSchedule.Teacher.Root">
+        <item name="android:background">@style/TextAppearance.AppCompat.Subhead</item>
+    </style>
+
+    <!--
+    android:background="?selectableItemBackground"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/std_margin"
+    android:paddingTop="@dimen/std_margin"
+    android:paddingLeft="@dimen/keyline_1"
+    android:paddingRight="@dimen/keyline_1"-->
+
+    <style name="Widget.GrSUSchedule.Teacher.Title">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Subhead</item>
+    </style>
+
+    <style name="Widget.GrSUSchedule.Teacher.Post">
+        <item name="android:textColor">?android:textColorSecondary</item>
+    </style>
+</resources>

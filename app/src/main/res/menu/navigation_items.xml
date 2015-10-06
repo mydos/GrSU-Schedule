@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/navigation_sections">
+        <item
+            android:id="@+id/navigation_my_schedule"
+            android:icon="@drawable/ic_navigation_schedule_24dp"
+            android:title="@string/navigation_my_schedule"/>
+        <item
+            android:id="@+id/navigation_groups"
+            android:icon="@drawable/ic_navigation_groups_24dp"
+            android:title="@string/navigation_student_schedule"/>
+        <item
+            android:id="@+id/navigation_teachers"
+            android:icon="@drawable/ic_navigation_teacher_24dp"
+            android:title="@string/navigation_teachers_schedule"/>
+    </group>
+
+    <group android:id="@+id/navigation_settings">
+        <item
+            android:id="@+id/navigation_share_app"
+            android:title="@string/navigation_share_app"/>
+    </group>
+</menu>

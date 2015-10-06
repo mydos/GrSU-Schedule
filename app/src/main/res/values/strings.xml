@@ -1,0 +1,55 @@
+<resources
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:locale="ru">
+
+    <string name="groups">Группы</string>
+    <string name="refresh">Обновить</string>
+    <string name="teachers">Преподаватели</string>
+    <string name="teacher">Преподаватель</string>
+    <string name="schedule">Расписание</string>
+
+    <string name="app_name">Расписание</string>
+    <string name="label_teachers">@string/teachers</string>
+    <string name="label_departments">Форма обучения</string>
+    <string name="label_groups">@string/groups</string>
+    <string name="label_courses">Курсы</string>
+    <string name="label_faculties">Факультеты</string>
+    <string name="label_group_schedule">@string/schedule</string>
+    <string name="label_app_schedule_display_preference">Настройки расписания</string>
+    <string name="label_teacher_schedule">@string/schedule</string>
+    <string name="label_mode_chooser">Выбор режима</string>
+
+    <string name="navigation_my_schedule">Мое расписание</string>
+    <string name="navigation_teachers_schedule">@string/teachers</string>
+    <string name="navigation_share_app">Поделиться ссылкой</string>
+    <string name="navigation_student_schedule">@string/groups</string>
+    <string name="app_share_can_not_handle">Невозможно отправить ссылку на приложение</string>
+    <string name="app_share_checkout">Попробуй это приложение</string>
+    <string name="app_share_title">Поделиться приложение</string>
+
+    <string name="menu_schedule_display_pref_title">@string/label_app_schedule_display_preference</string>
+    <string name="menu_change_app_mode">Изменить режим</string>
+
+    <string name="search_teachers_label">Поиск преподователя</string>
+    <string name="search_teachers_hint">Введите имя</string>
+
+    <string name="schedule_empty">Нет актуального расписания</string>
+    <string name="group_list_empty">Нет групп</string>
+
+    <string name="app_mode_student">Студент</string>
+    <string name="app_mode_teacher">@string/teacher</string>
+
+    <string name="button_app_mode_student">Я - Студент</string>
+    <string name="button_app_mode_teacher">Я - Преподаватель</string>
+
+    <string name="error_no_network">Отсутсвует подключение к интернету</string>
+    <string name="error_server">Сервер не отвечает</string>
+    <string name="error_client">Ошибка при запросе данных</string>
+    <string name="error_unknown_error">Неизвестная ошибка</string>
+
+    <string name="free_time_format">Форточка\n(%1$s-%2$s)</string>
+    <string name="lesson_time_format">%1$s\n%2$s</string>
+    <string name="lesson_place_format">%1$s - %2$s</string>
+    <string name="lesson_header_format">%1$s %2$s</string>
+    <string name="groud_fulltitle_format">%1$s, $2$s курс</string>
+</resources>

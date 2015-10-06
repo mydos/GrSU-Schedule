@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest
+    package="by.kirich1409.grsuschedule"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <supports-screens
+        android:largeScreens="false"
+        android:normalScreens="true"
+        android:resizeable="false"
+        android:smallScreens="true"
+        android:xlargeScreens="false"
+        />
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <application
+        android:name=".ScheduleApp"
+        android:allowBackup="true"
+        android:fullBackupContent="@xml/app_backup_scheme"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="false"
+        android:theme="@style/Theme.GrSUSchedule"
+        tools:ignore="UnusedAttribute"
+        >
+
+        <activity
+            android:name=".schedule.ScheduleActivity"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".preference.ModeChooserActivity"
+            android:label="@string/label_mode_chooser"
+            />
+
+        <activity android:name=".student.GroupPickerActivity"/>
+
+        <activity android:name=".student.GroupPickerDrawerActivity"/>
+
+        <activity
+            android:name=".teacher.TeacherPickerActivity"
+            android:label="@string/label_teachers"
+            />
+
+        <activity
+            android:name=".teacher.TeacherScheduleActivity"
+            android:label="@string/label_teacher_schedule"
+            />
+
+        <activity
+            android:name=".teacher.TeacherListActivity"
+            android:label="@string/label_teachers"
+            />
+
+        <activity
+            android:name=".student.GroupScheduleActivity"
+            android:label="@string/label_group_schedule"
+            />
+
+        <activity
+            android:name=".preference.ScheduleDisplayPrefActivity"
+            android:label="@string/label_app_schedule_display_preference"
+            />
+
+        <service
+            android:name=".network.ScheduleSpiceService"
+            android:exported="false"
+            />
+    </application>
+
+</manifest>

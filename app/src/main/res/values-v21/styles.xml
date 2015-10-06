@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Base.V21.Widget.GrSUSchedule.Toolbar" parent="Base.V7.Widget.GrSUSchedule.Toolbar">
+        <item name="android:elevation">8dp</item>
+    </style>
+
+    <style name="Base.Widget.GrSUSchedule.Toolbar" parent="Base.V21.Widget.GrSUSchedule.Toolbar"/>
+</resources>

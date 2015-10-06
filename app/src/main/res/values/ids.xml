@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="view_holder" type="id"/>
+    <item name="drawer_layout" type="id"/>
+    <item name="toolbar" type="id"/>
+    <item name="view_type_lesson" type="id"/>
+    <item name="view_type_day_header" type="id"/>
+    <item name="view_type_free_time" type="id"/>
+    <item name="view_type_subgroups_lesson" type="id"/>
+    <item name="view_type_lesson_group" type="id"/>
+</resources>
