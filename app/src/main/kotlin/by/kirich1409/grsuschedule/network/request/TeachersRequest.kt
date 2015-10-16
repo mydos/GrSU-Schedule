@@ -12,7 +12,5 @@ public class TeachersRequest(val extended: Boolean = true) :
                 Teachers::class.java, ScheduleService::class.java) {
 
     @Throws(Exception::class)
-    override fun loadDataFromNetwork(): Teachers {
-        return service.getTeachers(extended)
-    }
+    override fun loadDataFromNetwork() = service.getTeachers(extended)
 }

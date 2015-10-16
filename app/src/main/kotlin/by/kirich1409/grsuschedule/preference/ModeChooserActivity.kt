@@ -1,7 +1,6 @@
 package by.kirich1409.grsuschedule.preference
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import by.kirich1409.grsuschedule.R
@@ -60,9 +59,5 @@ public class ModeChooserActivity : BaseActivity() {
     companion object {
         private val REQUEST_PICK_TEACHER = 1001
         private val REQUEST_PICK_GROUP = 1002
-
-        public fun makeIntent(context: Context): Intent {
-            return Intent(context, ModeChooserActivity::class.java)
-        }
     }
 }

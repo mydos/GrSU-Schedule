@@ -5,11 +5,21 @@
         android:persistent="false"
         android:summary="@string/pref_show_empty_lesson_summary"
         android:title="@string/pref_show_empty_lesson_title"
+        android:order="1"
         />
 
     <CheckBoxPreference
         android:key="@string/pref_only_actual_schedule_key"
         android:persistent="false"
         android:title="@string/pref_only_actual_schedule_title"
+        android:order="2"
+        />
+
+    <ListPreference
+        android:entries="@array/pref_navigation_mode_entries"
+        android:entryValues="@array/pref_navigation_mode_entries_values"
+        android:key="@string/pref_navigation_mode_key"
+        android:title="@string/pref_navigation_mode_title"
+        android:order="3"
         />
 </PreferenceScreen>

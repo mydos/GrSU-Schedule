@@ -13,12 +13,7 @@ public class GroupScheduleRequest(val groupId: Int, startDate: Date?, endDate: D
 
     @Throws(Exception::class)
     override fun loadDataFromNetwork(): Schedule {
-        if (endDate != null && startDate != null) {
-            return service.getGroupSchedule(groupId, QueryDate(startDate), QueryDate(endDate))
-        } else if (startDate != null) {
-            return service.getGroupSchedule(groupId, QueryDate(startDate))
-        } else {
-            return service.getGroupSchedule(groupId)
-        }
+        return service.getGroupSchedule(groupId,
+                QueryDate.valueOf(startDate), QueryDate.valueOf(endDate))
     }
 }

@@ -23,6 +23,13 @@ public open class RecyclerViewFragment : Fragment() {
         set(layoutManager) {
             delegate.layoutManager = layoutManager
         }
+    val recyclerView: RecyclerView?
+        get() = delegate.recyclerView
+    var progressVisible: Boolean
+        get() = delegate.progressVisible
+        set(visible) {
+            delegate.progressVisible = visible
+        }
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle?): View {
@@ -34,7 +41,7 @@ public open class RecyclerViewFragment : Fragment() {
         delegate.onViewCreated(view)
     }
 
-    fun setProgressVisible(visible: Boolean) {
+    fun setProgressVisible(visible: Boolean, animate: Boolean = true) {
         delegate.setProgressVisible(visible)
     }
 

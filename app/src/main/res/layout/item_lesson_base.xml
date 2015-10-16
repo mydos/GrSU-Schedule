@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="lesson" type="by.kirich1409.grsuschedule.model.Lesson"
+            />
+
+        <import type="android.view.View"/>
+    </data>
+
+    <LinearLayout
+        style="@style/Widget.GrSUSchedule.LessonContent"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:minHeight="?listPreferredItemHeight"
+        android:orientation="vertical"
+        tools:ignore="RtlHardcoded,RtlSymmetry"
+        >
+
+        <TextView
+            android:id="@+id/lesson_teacher"
+            style="@style/Widget.GrSUSchedule.Lesson.Teacher"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{lesson.teacher.fullname}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            tools:text="Teacher"
+            />
+
+        <by.kirich1409.grsuschedule.widget.RowLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <TextView
+                android:id="@+id/lesson_place"
+                style="@style/Widget.GrSUSchedule.Lesson.Place"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{lesson.fullAddress}"
+                android:visibility="@{lesson.fullAddress != null ? View.VISIBLE : View.GONE}"
+                tools:text="Place"
+                tools:visibility="visible"
+                />
+
+            <TextView
+                android:id="@+id/lesson_subgroup"
+                style="@style/Widget.GrSUSchedule.Lesson.Subgroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{lesson.subgroup.title}"
+                android:visibility="@{lesson.subgroup != null ? View.VISIBLE : View.GONE}"
+                tools:text="Subgroup"
+                tools:visibility="visible"
+                />
+        </by.kirich1409.grsuschedule.widget.RowLayout>
+    </LinearLayout>
+</layout>

@@ -7,12 +7,9 @@ import com.octo.android.robospice.request.retrofit.RetrofitSpiceRequest
 /**
  * Created by kirillrozov on 9/13/15.
  */
-public class FacultiesRequest :
-        RetrofitSpiceRequest<Faculties, ScheduleService>(
-                Faculties::class.java, ScheduleService::class.java) {
+public class FacultiesRequest : RetrofitSpiceRequest<Faculties, ScheduleService>(
+        Faculties::class.java, ScheduleService::class.java) {
 
     @Throws(Exception::class)
-    override fun loadDataFromNetwork(): Faculties {
-        return service.getFaculties()
-    }
+    override fun loadDataFromNetwork() = service.getFaculties()
 }

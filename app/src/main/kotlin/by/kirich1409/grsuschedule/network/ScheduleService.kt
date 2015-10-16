@@ -1,6 +1,10 @@
 package by.kirich1409.grsuschedule.network
 
-import by.kirich1409.grsuschedule.model.*
+import by.kirich1409.grsuschedule.model.Departments
+import by.kirich1409.grsuschedule.model.Faculties
+import by.kirich1409.grsuschedule.model.Groups
+import by.kirich1409.grsuschedule.model.Schedule
+import by.kirich1409.grsuschedule.model.Teachers
 import retrofit.http.GET
 import retrofit.http.Query
 
@@ -27,12 +31,12 @@ public interface ScheduleService {
     @GET("/getGroupSchedule")
     public fun getGroupSchedule(
             @Query("groupId") groupId: Int,
-            @Query("dateStart") start: QueryDate? = null,
-            @Query("dateEnd") end: QueryDate? = null): Schedule
+            @Query("dateStart") start: QueryDate?,
+            @Query("dateEnd") end: QueryDate?): Schedule
 
     @GET("/getTeacherSchedule")
     public fun getTeacherSchedule(
             @Query("teacherId") teacherId: Int,
-            @Query("dateStart") start: QueryDate? = null,
-            @Query("dateEnd") end: QueryDate? = null): Schedule
+            @Query("dateStart") start: QueryDate?,
+            @Query("dateEnd") end: QueryDate?): Schedule
 }

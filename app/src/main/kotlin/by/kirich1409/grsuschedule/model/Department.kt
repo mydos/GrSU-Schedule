@@ -20,18 +20,12 @@ public class Department : BaseItem {
     public constructor(parcel: Parcel) : super(parcel)
 
     companion object {
-
         @Keep
         public val CREATOR: Parcelable.Creator<Department>
                 = object : Parcelable.Creator<Department> {
 
-            override fun createFromParcel(source: Parcel): Department {
-                return Department(source)
-            }
-
-            override fun newArray(size: Int): Array<Department?> {
-                return arrayOfNulls(size)
-            }
+            override fun createFromParcel(source: Parcel) = Department(source)
+            override fun newArray(size: Int): Array<Department?> = arrayOfNulls(size)
         }
     }
 }

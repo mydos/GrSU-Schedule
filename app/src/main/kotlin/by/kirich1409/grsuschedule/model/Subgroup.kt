@@ -19,18 +19,9 @@ public class Subgroup : BaseItem {
     public constructor(source: Parcel) : super(source)
 
     companion object {
-
         public val CREATOR: Parcelable.Creator<Subgroup> = object : Parcelable.Creator<Subgroup> {
-
-            override fun createFromParcel(source: Parcel): Subgroup {
-                return Subgroup(source)
-            }
-
-            override fun newArray(size: Int): Array<Subgroup?> {
-                return arrayOfNulls(size)
-            }
+            override fun createFromParcel(source: Parcel) = Subgroup(source)
+            override fun newArray(size: Int): Array<Subgroup?> = arrayOfNulls(size)
         }
     }
 }
-
-public fun Subgroup?.isNull(): Boolean = this == null || (this.id <= 0 && this.title.isEmpty())

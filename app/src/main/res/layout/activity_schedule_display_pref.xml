@@ -11,7 +11,7 @@
 
     <fragment
         android:id="@+id/schedule_display_pref_fragment"
-        android:name="by.kirich1409.grsuschedule.preference.ScheduleDisplayPrefFragment"
+        android:name="by.kirich1409.grsuschedule.preference.AppSettingsFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />

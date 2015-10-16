@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?selectableItemBackground"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    tools:ignore="RtlHardcoded,RtlSymmetry"
+    >
+
+    <include layout="@layout/item_lesson_time"/>
+
+    <TextView
+        android:id="@+id/lesson_title"
+        style="@style/Widget.GrSUSchedule.Lesson.Title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingLeft="@dimen/std_margin"
+        android:paddingRight="@dimen/std_margin"
+        tools:text="Lesson name"
+        />
+
+    <TextView
+        android:id="@+id/lessons_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        tools:ignore="SpUsage"
+        tools:text="6"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+        tools:ignore="ContentDescription"
+        />
+
+</LinearLayout>

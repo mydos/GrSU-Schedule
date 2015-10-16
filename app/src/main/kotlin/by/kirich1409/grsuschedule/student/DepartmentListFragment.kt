@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import by.kirich1409.grsuschedule.BuildConfig
 import by.kirich1409.grsuschedule.R
 import by.kirich1409.grsuschedule.app.SimpleSpiceListFragment
 import by.kirich1409.grsuschedule.model.Department
@@ -27,16 +28,16 @@ public class DepartmentListFragment : SimpleSpiceListFragment<Departments>() {
         super.onAttach(context)
         if (context is Listener) {
             this.listener = context
-        } else {
+        } else if (BuildConfig.DEBUG) {
             throw RuntimeException(
-                    "Host content '$context' must implements DepartmentsFragment.Listener interface.")
+                    "Host content must implements DepartmentListFragment.Listener interface.")
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val activity = activity as AppCompatActivity
-        activity.setSupportActionBarTitle(R.string.label_departments)
+        activity.setSupportActionBarTitle(R.string.label_department)
         activity.setSupportActionBarSubtitle(null)
     }
 

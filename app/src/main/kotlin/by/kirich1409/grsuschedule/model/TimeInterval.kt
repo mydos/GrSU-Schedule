@@ -62,7 +62,6 @@ public class TimeInterval :
     companion object {
         public val CREATOR: Parcelable.Creator<TimeInterval> = object : Parcelable.Creator<TimeInterval> {
             override fun createFromParcel(source: Parcel): TimeInterval = TimeInterval(source)
-
             override fun newArray(size: Int): Array<TimeInterval?> = arrayOfNulls(size)
         }
     }

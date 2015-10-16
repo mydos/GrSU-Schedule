@@ -9,16 +9,16 @@ import java.util.*
  */
 public class QueryDate(private val date: Date) {
 
-    private val dateString: String by lazy { mDateFormat.format(date) }
+    private val dateString: String by lazy { dateFormat.format(date) }
 
     @SuppressLint("SimpleDateFormat")
-    private val mDateFormat = SimpleDateFormat(DATE_FORMAT)
+    private val dateFormat = SimpleDateFormat(DATE_FORMAT)
 
-    override fun toString(): String {
-        return dateString
-    }
+    override fun toString() = dateString
 
     companion object {
-        public val DATE_FORMAT: String = "dd.MM.yyyy"
+        const val DATE_FORMAT: String = "dd.MM.yyyy"
+        public fun valueOf(date: Date?): QueryDate? = if (date == null) null else QueryDate(date)
+
     }
 }

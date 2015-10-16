@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
+import by.kirich1409.grsuschedule.BuildConfig
 import by.kirich1409.grsuschedule.R
 import by.kirich1409.grsuschedule.app.SpiceListFragment
 import by.kirich1409.grsuschedule.model.Group
@@ -32,9 +33,9 @@ public class GroupListFragment : SpiceListFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val args = arguments
-        course = args.getInt(ARG_COURSE)
         departmentId = args.getInt(ARG_DEPARTMENT_ID)
         facultyId = args.getInt(ARG_FACULTY_ID)
+        course = args.getInt(ARG_COURSE)
     }
 
     override fun loadData(force: Boolean) {
@@ -45,13 +46,13 @@ public class GroupListFragment : SpiceListFragment() {
                 groupsRequestListener)
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is Listener) {
             listener = context
-        } else {
+        } else if (BuildConfig.DEBUG) {
             throw RuntimeException(
-                    "Host content must implements GroupsFragment.Listener interface.")
+                    "Host content must implements GroupListFragment.Listener interface.")
         }
     }
 
@@ -61,7 +62,7 @@ public class GroupListFragment : SpiceListFragment() {
         val activity = activity as AppCompatActivity
         val actionBar = activity.supportActionBar
         if (actionBar != null) {
-            actionBar.title = getText(R.string.label_groups)
+            actionBar.title = getText(R.string.label_group)
             actionBar.subtitle = null
         }
     }
@@ -109,9 +110,9 @@ public class GroupListFragment : SpiceListFragment() {
     }
 
     companion object {
-        const val ARG_COURSE = "course"
-        const val ARG_DEPARTMENT_ID = "departmentId"
-        const val ARG_FACULTY_ID = "facultyId"
+        val ARG_COURSE = if (BuildConfig.DEBUG) "course" else "a"
+        val ARG_DEPARTMENT_ID = if (BuildConfig.DEBUG) "departmentId" else "b"
+        val ARG_FACULTY_ID = if (BuildConfig.DEBUG) "facultyId" else "c"
 
         public fun newInstance(departmentId: Int, facultyId: Int, course: Int): GroupListFragment {
             val args = Bundle(3)

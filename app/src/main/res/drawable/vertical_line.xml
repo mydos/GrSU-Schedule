@@ -3,5 +3,5 @@
        android:shape="rectangle">
 
     <solid android:color="@color/divider"/>
-    <size android:height="@dimen/divider_size"/>
+    <size android:width="@dimen/divider_size"/>
 </shape>

@@ -3,6 +3,7 @@ package by.kirich1409.grsuschedule.teacher
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import by.kirich1409.grsuschedule.BuildConfig
 import by.kirich1409.grsuschedule.R
 import by.kirich1409.grsuschedule.app.BaseActivity
 import by.kirich1409.grsuschedule.model.Teacher
@@ -28,6 +29,6 @@ public class TeacherPickerActivity : BaseActivity(), TeacherListFragment.Listene
     }
 
     companion object {
-        public val EXTRA_TEACHER: String = "teacher"
+        public val EXTRA_TEACHER = if (BuildConfig.DEBUG) "teacher" else "a"
     }
 }

@@ -2,37 +2,52 @@ package by.kirich1409.grsuschedule.preference
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.support.v4.content.SharedPreferencesCompat
 import by.kirich1409.grsuschedule.BuildConfig
+import by.kirich1409.grsuschedule.utils.SCHEDULE_NAV_MODE_HORIZONTAL
+import by.kirich1409.grsuschedule.utils.SCHEDULE_NAV_MODE_VERTICAL
+import by.kirich1409.grsuschedule.utils.isPhone
 
 /**
  * Created by kirillrozov on 9/25/15.
  */
-public class ScheduleDisplayPreference(context: Context) {
+public class ScheduleDisplayPreference(private val context: Context) {
+
     private val preferences: SharedPreferences =
             context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
 
     var onlyActualSchedule: Boolean
-        get() {
-            return preferences.getBoolean(PREF_ONLY_ACTUAL_SCHEDULE, PREF_ONLY_ACTUAL_SCHEDULE_DEFAULT)
-        }
+        get() = preferences.getBoolean(PREF_ONLY_ACTUAL_SCHEDULE, PREF_ONLY_ACTUAL_SCHEDULE_DEFAULT)
         set(onlyActualSchedule) {
-            applyBooleanValue(PREF_ONLY_ACTUAL_SCHEDULE, onlyActualSchedule)
+            preferences.edit()
+                    .putBoolean(PREF_ONLY_ACTUAL_SCHEDULE, onlyActualSchedule)
+                    .apply()
         }
 
     var showEmptyLesson: Boolean
-        get() {
-            return preferences.getBoolean(PREF_SHOW_EMPTY_LESSON, PREF_SHOW_EMPTY_LESSON_DEFAULT)
-        }
+        get() = preferences.getBoolean(PREF_SHOW_EMPTY_LESSON, PREF_SHOW_EMPTY_LESSON_DEFAULT)
         set(showEmptyLesson) {
-            applyBooleanValue(PREF_SHOW_EMPTY_LESSON, showEmptyLesson)
+            preferences.edit()
+                    .putBoolean(PREF_SHOW_EMPTY_LESSON, showEmptyLesson)
+                    .apply()
         }
 
-    private fun applyBooleanValue(key: String, value: Boolean) {
-        val editor = preferences.edit()
-        editor.putBoolean(key, value)
-        SharedPreferencesCompat.EditorCompat.getInstance().apply(editor)
-    }
+    var navigationMode: Int
+        get() {
+            val defaultNavMode = if (context.isPhone()) {
+                SCHEDULE_NAV_MODE_HORIZONTAL
+            } else {
+                SCHEDULE_NAV_MODE_VERTICAL
+            }
+            return preferences.getInt(PREF_NAVIGATION_MODE, defaultNavMode)
+        }
+        set(navMode) {
+            preferences.edit()
+                    .putInt(PREF_NAVIGATION_MODE, navMode)
+                    .apply()
+        }
+
+    val isHorizontalNavigation: Boolean
+        get() = navigationMode == SCHEDULE_NAV_MODE_HORIZONTAL
 
     public fun registerOnPreferenceChangeListener(
             listener: SharedPreferences.OnSharedPreferenceChangeListener) {
@@ -45,8 +60,9 @@ public class ScheduleDisplayPreference(context: Context) {
     }
 
     companion object {
-        val PREF_SHOW_EMPTY_LESSON = if (BuildConfig.DEBUG) "showEmptyLesson" else "sel"
-        val PREF_ONLY_ACTUAL_SCHEDULE = if (BuildConfig.DEBUG) "onlyActualSchedule" else "oas"
+        const val PREF_SHOW_EMPTY_LESSON = "showEmptyLesson"
+        const val PREF_ONLY_ACTUAL_SCHEDULE = "onlyActualSchedule"
+        val PREF_NAVIGATION_MODE = if (BuildConfig.DEBUG) "navMode" else "a"
 
         private val PREF_NAME = "scheduleDisplayPref"
         private val PREF_SHOW_EMPTY_LESSON_DEFAULT = false

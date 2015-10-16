@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView
-    android:id="@android:id/text1"
-    style="@style/Widget.GrSUSchedule.FreeTime"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:text="Форточка"
-    />
+<layout>
+
+    <data>
+        <variable
+            name="freeTime" type="by.kirich1409.grsuschedule.schedule.FreeTime"
+            />
+    </data>
+
+    <TextView
+        android:id="@android:id/text1"
+        style="@style/Widget.GrSUSchedule.FreeTime"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@{@string/free_time_format(freeTime.interval.startTime, freeTime.interval.endTime)}"
+        tools:text="Форточка"
+        />
+</layout>

@@ -19,6 +19,34 @@
 
     <style name="Theme.GrSUSchedule" parent="Base.Theme.GrSUSchedule"/>
 
+    <style name="Base.V7.Theme.GrSUSchedule.Dialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primaryDark</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="preferenceTheme">@style/ThemeOverlay.Preference</item>
+        <item name="shadowDrawable">@drawable/bottom_shadow</item>
+        <item name="minHorizontalSpace">@dimen/margin_8</item>
+        <item name="edgeeffect_color">@color/primary</item>
+        <item name="matProg_barColor">@color/accent</item>
+        <item name="matProg_fillRadius">true</item>
+        <item name="android:overScrollMode">ifContentScrolls</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Base.Theme.GrSUSchedule.Dialog" parent="Base.V7.Theme.GrSUSchedule.Dialog"/>
+
+    <style name="Theme.GrSUSchedule.Dialog" parent="Base.Theme.GrSUSchedule.Dialog"/>
+
+    <style name="Base.Theme.GrSUSchedule.ScheduleDisplayPreference" parent="Theme.GrSUSchedule"/>
+    <style name="Base.Theme.GrSUSchedule.AlinementLesson" parent="Theme.GrSUSchedule"/>
+
+    <style name="Theme.GrSUSchedule.ScheduleDisplayPreference"
+           parent="Base.Theme.GrSUSchedule.ScheduleDisplayPreference"/>
+
+    <style name="Theme.GrSUSchedule.AlinementLesson"
+           parent="Base.Theme.GrSUSchedule.ScheduleDisplayPreference"/>
+
     <style name="ThemeOverlay.GrSUSchedule.AppBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
     <style name="ThemeOverlay.GrSUSchedule.Popup" parent="ThemeOverlay.AppCompat.Light"/>

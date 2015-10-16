@@ -14,14 +14,12 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewCompat
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.TextView
-import by.kirich1409.grsuschedule.BuildConfig
 import by.kirich1409.grsuschedule.R
 import com.octo.android.robospice.exception.NoNetworkException
 import com.octo.android.robospice.persistence.exception.SpiceException
@@ -31,6 +29,10 @@ import android.support.v4.app.Fragment as SupportFragment
 /**
  * Created by kirillrozov on 9/15/15.
  */
+
+public fun Context.isTablet() = resources.getBoolean(R.bool.is_tablet)
+
+public fun Context.isPhone() = resources.getBoolean(R.bool.is_phone)
 
 public fun TextView.setDrawableTop(drawable: Drawable?) {
     val compoundDrawables = compoundDrawables
@@ -42,26 +44,8 @@ public fun TextView.setDrawableTop(drawable: Drawable?) {
     )
 }
 
-public fun View.setPadding2(
-        paddingRight: Int = this.paddingRight,
-        paddingTop: Int = this.paddingTop,
-        paddingLeft: Int = this.paddingLeft,
-        paddingBottom: Int = this.paddingBottom) {
-    setPadding(paddingRight, paddingTop, paddingLeft, paddingBottom)
-}
-
 public fun TextView.setDrawableTop(@DrawableRes drawableResId: Int) {
     setDrawableTop(ContextCompat.getDrawable(context, drawableResId))
-}
-
-public fun Any.debugLog(tag: String, message: String) {
-    if (BuildConfig.DEBUG || Log.isLoggable(tag, Log.DEBUG)) {
-        Log.d(tag, message)
-    }
-}
-
-public fun Any.debugLog(message: String) {
-    debugLog(this.javaClass.simpleName, message)
 }
 
 public fun TextView.setTextOrHideIfEmpty(text: CharSequence?) {
@@ -132,23 +116,22 @@ public fun CharSequence.isDigitsOnly(): Boolean {
 }
 
 public fun Exception.getErrorMessage(context: Context): CharSequence {
-    return when (this) {
-        is NoNetworkException -> context.getText(R.string.error_no_network)
-        is SpiceException -> {
-            val cause = getCause()
-            when (cause) {
-                is RetrofitError -> {
-                    when (cause.response.status / 100) {
-                        clientErrorStatuses -> context.getText(R.string.error_client)
-                        serverErrorStatuses -> context.getText(R.string.error_server)
-                        else -> context.getText(R.string.error_unknown_error)
-                    }
+    if (this is NoNetworkException) {
+        return context.getText(R.string.error_no_network)
+    } else if (this is SpiceException) {
+        val cause = getCause()
+        if (cause is RetrofitError) {
+            val response = cause.response
+            if (response != null) {
+                if (response.status / 100 == clientErrorStatuses) {
+                    return context.getText(R.string.error_client)
+                } else if (response.status / 100 == serverErrorStatuses) {
+                    return context.getText(R.string.error_server)
                 }
-                else -> context.getText(R.string.error_unknown_error)
             }
         }
-        else -> context.getText(R.string.error_unknown_error)
     }
+    return context.getText(R.string.error_unknown_error)
 }
 
 private const val serverErrorStatuses = 5
@@ -194,8 +177,6 @@ private class FadeAnimationListener(val view: View, val visible: Boolean) :
         view.visibility = if (visible) View.VISIBLE else View.GONE
     }
 }
-
-public fun Collection<*>?.isNullOrEmpty() = this == null || isEmpty()
 
 public fun Collection<*>?.isNotNullOrEmpty() = this != null && isNotEmpty()
 

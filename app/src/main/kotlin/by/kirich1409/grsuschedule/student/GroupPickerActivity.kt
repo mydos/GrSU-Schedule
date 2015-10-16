@@ -3,7 +3,6 @@ package by.kirich1409.grsuschedule.student
 import android.os.Bundle
 import by.kirich1409.grsuschedule.R
 import by.kirich1409.grsuschedule.app.BaseActivity
-import by.kirich1409.grsuschedule.model.Course
 import by.kirich1409.grsuschedule.model.Department
 import by.kirich1409.grsuschedule.model.Faculty
 import by.kirich1409.grsuschedule.model.Group
@@ -12,8 +11,8 @@ import by.kirich1409.grsuschedule.model.Group
  * Created by kirillrozov on 9/13/15.
  */
 public class GroupPickerActivity : BaseActivity(),
-        CoursesFragment.Listener, DepartmentListFragment.Listener,
-        FacultiesListFragment.Listener, GroupListFragment.Listener {
+        CourseListFragment.Listener, DepartmentListFragment.Listener,
+        FacultyListFragment.Listener, GroupListFragment.Listener {
 
     private val delegate = GroupPickerActivityDelegate(this)
 
@@ -21,6 +20,10 @@ public class GroupPickerActivity : BaseActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_with_toolbar)
         delegate.onCreate(savedInstanceState)
+
+        val actionBar = supportActionBar
+        actionBar.setDisplayHomeAsUpEnabled(true)
+        actionBar.setDisplayShowHomeEnabled(true)
     }
 
     override fun onCourseSelected(course: Course) {
@@ -44,7 +47,12 @@ public class GroupPickerActivity : BaseActivity(),
         delegate.onSaveInstanceState(outState)
     }
 
+    override fun onHomeItemSelected(): Boolean {
+        finish()
+        return true
+    }
+
     companion object{
-        const val EXTRA_GROUP = GroupPickerActivityDelegate.EXTRA_GROUP
+        val EXTRA_GROUP = GroupPickerActivityDelegate.EXTRA_GROUP
     }
 }

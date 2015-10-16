@@ -12,12 +12,14 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.ListView
+import by.kirich1409.grsuschedule.BuildConfig
 import by.kirich1409.grsuschedule.R
 import by.kirich1409.grsuschedule.app.SimpleSpiceListFragment
 import by.kirich1409.grsuschedule.model.Teacher
 import by.kirich1409.grsuschedule.model.Teachers
 import by.kirich1409.grsuschedule.network.request.TeachersRequest
 import by.kirich1409.grsuschedule.widget.TeacherAdapter
+import com.octo.android.robospice.persistence.DurationInMillis
 import com.octo.android.robospice.persistence.exception.SpiceException
 
 /**
@@ -28,6 +30,7 @@ public class TeacherListFragment : SimpleSpiceListFragment<Teachers>() {
     var listener: Listener? = null
     override val cacheKey = "teachers"
     override val dataClass = Teachers::class.java
+    override val dataCacheDuration = DurationInMillis.ONE_DAY * 3
 
     var teachers: Teachers? = null
         set(value) {
@@ -164,8 +167,8 @@ public class TeacherListFragment : SimpleSpiceListFragment<Teachers>() {
     }
 
     companion object {
-        const val ARG_TEACHERS = "teachers"
-        const val ARG_QUERY = "query"
+        val ARG_TEACHERS = if (BuildConfig.DEBUG) "teachers" else "a"
+        val ARG_QUERY = if (BuildConfig.DEBUG) "query" else "b"
         const val LOADER_TEACHERS = 12312
     }
 }

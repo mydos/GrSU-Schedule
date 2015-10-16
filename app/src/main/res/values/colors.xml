@@ -3,7 +3,7 @@
     <color name="accent">#E0CF0B</color>
     <color name="primaryDark">#3F51B5</color>
     <color name="primary">#1846BE</color>
-    <color name="divider">#1000</color>
+    <color name="divider">#A000</color>
     <color name="silver">#C0C0C0</color>
     <color name="darkgrey">#A9A9A9</color>
 </resources>

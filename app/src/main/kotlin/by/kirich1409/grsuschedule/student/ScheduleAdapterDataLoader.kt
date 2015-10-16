@@ -3,17 +3,23 @@ package by.kirich1409.grsuschedule.student
 import android.content.Context
 import android.content.SharedPreferences
 import by.kirich1409.grsuschedule.app.SimpleAsyncTaskLoader
-import by.kirich1409.grsuschedule.model.*
+import by.kirich1409.grsuschedule.model.Day
+import by.kirich1409.grsuschedule.model.Lesson
+import by.kirich1409.grsuschedule.model.Schedule
+import by.kirich1409.grsuschedule.model.TimeInterval
 import by.kirich1409.grsuschedule.preference.ScheduleDisplayPreference
+import by.kirich1409.grsuschedule.schedule.AlinementLessons
+import by.kirich1409.grsuschedule.schedule.DaySchedule
+import by.kirich1409.grsuschedule.schedule.FreeTime
+import by.kirich1409.grsuschedule.schedule.ParallelLesson
 import by.kirich1409.grsuschedule.utils.Constants
-import by.kirich1409.grsuschedule.widget.ScheduleAdapter
 import java.util.*
 
 /**
  * Created by kirillrozov on 9/23/15.
  */
 class ScheduleAdapterDataLoader(context: Context, val schedule: Schedule?) :
-        SimpleAsyncTaskLoader<ScheduleAdapter.Data>(context) {
+        SimpleAsyncTaskLoader<Array<DaySchedule>>(context) {
 
     private val scheduleDisplayPreference by lazy { ScheduleDisplayPreference(context) }
     private val prefChangeListener = object : SharedPreferences.OnSharedPreferenceChangeListener {
@@ -25,44 +31,39 @@ class ScheduleAdapterDataLoader(context: Context, val schedule: Schedule?) :
         }
     }
 
-    override fun loadInBackground(): ScheduleAdapter.Data? {
+    override fun loadInBackground(): Array<DaySchedule> {
         if (schedule == null) {
-            return ScheduleAdapter.Data(emptyArray())
+            return emptyArray()
         }
 
         val days: List<Day> = getScheduleDays(schedule)
 
         if (days.isEmpty()) {
-            return ScheduleAdapter.Data(emptyArray())
+            return emptyArray()
         } else {
             val showEmptyLesson = scheduleDisplayPreference.showEmptyLesson
-            val items = ArrayList<Any>((days.size() + 1) * 4 + 5)
 
-            days.forEach {
+            return days.map {
                 val groupedLessons = it.lessons.groupBy({ it.interval })
-                items.add(it)
                 val dayItems = groupedLessons.keySet()
                         .sorted()
                         .map({ groupedLessons.get(it)!!.toList() })
                         .map({ mapLessons(it) })
                         .toLinkedList()
 
-
                 if (showEmptyLesson) {
                     addEmptyLessons(dayItems)
                 }
-                items.addAll(dayItems)
-            }
-
-            return ScheduleAdapter.Data(items.toArray())
+                DaySchedule(it.date, dayItems.toTypedArray())
+            }.toTypedArray()
         }
     }
 
-    private fun addEmptyLessons(dayItems: LinkedList<Any>) {
+    private fun addEmptyLessons(dayItems: MutableList<DaySchedule.Item>) {
         if (dayItems.isNotEmpty()) {
-            var prevLesson: Lesson? = getLesson(dayItems[0])
+            var prevLesson: Lesson? = dayItems[0].getFirstLesson()
             for (i in 1 until dayItems.size()) {
-                val item = getLesson(dayItems[i])
+                val item = dayItems[i].getFirstLesson()
                 if (prevLesson is Lesson && item is Lesson) {
                     val interval = TimeInterval(
                             prevLesson.interval.endTime, item.interval.startTime)
@@ -75,24 +76,20 @@ class ScheduleAdapterDataLoader(context: Context, val schedule: Schedule?) :
         }
     }
 
-    private fun mapLessons(it: List<Lesson>): Any {
+    private fun mapLessons(lessons: List<Lesson>): DaySchedule.Item {
+        val lessonsCount = lessons.size()
         return when {
-            it.size() == 1 -> it[0]
-            it.size() > 1 -> {
-                val lesson = it.get(0)
+            lessonsCount == 1 -> lessons[0]
+            lessonsCount > 1 -> {
+                val lesson = lessons.get(0)
                 val interval = lesson.interval
                 val title = lesson.title
-                val address = lesson.address
-                val room = lesson.room
-                if (it.all({
-                    it.interval == interval
-                            && it.title == title
-                            && it.address == address
-                            && it.room == room
-                })) {
-                    LessonGroup(interval, title, address, room, it.toTypedArray())
+                val lessonEquals: (Lesson) -> Boolean =
+                        { it.interval == interval && it.title.equals(title, ignoreCase = true) }
+                if (lessons.all(lessonEquals)) {
+                    AlinementLessons(interval, title, lessons.toTypedArray())
                 } else {
-                    it.toTypedArray()
+                    ParallelLesson(interval, lessons.toTypedArray())
                 }
             }
             else -> throw RuntimeException()
@@ -104,7 +101,7 @@ class ScheduleAdapterDataLoader(context: Context, val schedule: Schedule?) :
             val now = Calendar.getInstance(Constants.LOCALE_RU)
             val dateCal = Calendar.getInstance(Constants.LOCALE_RU)
             schedule.days.filter {
-                dateCal.time = it.date
+                dateCal.time = it.date.toDate()
                 now.get(Calendar.YEAR) <= dateCal.get(Calendar.YEAR)
                         && now.get(Calendar.DAY_OF_YEAR) <= dateCal.get(Calendar.DAY_OF_YEAR)
             }
@@ -119,14 +116,5 @@ class ScheduleAdapterDataLoader(context: Context, val schedule: Schedule?) :
 
     override fun unregisterListeners() {
         scheduleDisplayPreference.unregisterOnPreferenceChangeListener(prefChangeListener)
-    }
-
-    private fun getLesson(item: Any?): Lesson? {
-        return when (item) {
-            is Lesson -> item
-            is Array<Lesson> -> item[0]
-            is LessonGroup -> item.lessons[0]
-            else -> null
-        }
     }
 }

@@ -6,7 +6,7 @@
     <style name="Base.V7.Widget.GrSUSchedule.Toolbar" parent="Widget.AppCompat.Toolbar">
         <item name="android:id">@id/toolbar</item>
         <item name="popupTheme">@style/ThemeOverlay.GrSUSchedule.Popup</item>
-        <item name="theme">@style/ThemeOverlay.GrSUSchedule.AppBar</item>
+        <item name="android:theme">@style/ThemeOverlay.GrSUSchedule.AppBar</item>
         <item name="android:background">?colorPrimary</item>
         <item name="android:minHeight">?actionBarSize</item>
     </style>
@@ -96,4 +96,17 @@
     <style name="Widget.GrSUSchedule.Teacher.Post">
         <item name="android:textColor">?android:textColorSecondary</item>
     </style>
+
+    <style name="Base.V7.Widget.GrSUSchedule.ScheduleRecyclerView" parent="">
+        <item name="android:paddingTop">@dimen/margin_16</item>
+        <item name="android:paddingBottom">@dimen/margin_16</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:overScrollMode">ifContentScrolls</item>
+    </style>
+
+    <style name="Base.Widget.GrSUSchedule.ScheduleRecyclerView"
+           parent="Base.V7.Widget.GrSUSchedule.ScheduleRecyclerView"/>
+
+    <style name="Widget.GrSUSchedule.ScheduleRecyclerView"
+           parent="Base.Widget.GrSUSchedule.ScheduleRecyclerView"/>
 </resources>

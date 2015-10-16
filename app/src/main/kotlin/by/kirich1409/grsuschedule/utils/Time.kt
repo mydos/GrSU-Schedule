@@ -1,9 +1,10 @@
 package by.kirich1409.grsuschedule.utils
 
+import android.content.Context
 import android.os.Parcel
 import android.os.Parcelable
+import android.text.format.DateFormat
 import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 import kotlin.text.Regex
 
@@ -13,9 +14,6 @@ import kotlin.text.Regex
 public class Time : Parcelable, Comparable<Time> {
     val hours: Int
     val minutes: Int
-
-    @JsonIgnore
-    private val string by lazy { "%2d:%02d".format(hours, minutes) }
 
     @JsonCreator
     public constructor(@JsonProperty("hours") hours: Int, @JsonProperty("minutes") minutes: Int) {
@@ -61,14 +59,22 @@ public class Time : Parcelable, Comparable<Time> {
         return if (compareHours != 0) compareHours else minutes.compareTo(other.minutes)
     }
 
-    override fun toString() = string
+    override fun toString() = "%2d:%02d".format(hours, minutes)
+
+    fun toString(context: Context): String {
+        val hours = if (DateFormat.is24HourFormat(context) || hours <= 12) {
+            this.hours
+        } else {
+            this.hours % 12
+        }
+        return "%2d:%02d".format(hours, minutes)
+    }
 
     companion object {
         val timeRegex = Regex("\\d{1,2}:\\d{2}")
 
         public val CREATOR = object : Parcelable.Creator<Time> {
             override fun newArray(size: Int): Array<out Time?> = arrayOfNulls(size)
-
             override fun createFromParcel(source: Parcel): Time = Time(source)
         }
     }

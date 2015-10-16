@@ -73,15 +73,16 @@ public open class ListFragment : Fragment() {
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle?): View {
-        return inflater.inflate(R.layout.fragment_list, container, false)
+        val view = inflater.inflate(R.layout.fragment_list, container, false)
+        listView = view.findViewById(android.R.id.list) as ListView
+        emptyView = view.findViewById(android.R.id.empty) as TextView?
+        progressView = view.findViewById(android.R.id.progress)
+        return view
     }
 
     @CallSuper
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        listView = view.findViewById(android.R.id.list) as ListView
-        emptyView = view.findViewById(android.R.id.empty) as TextView?
-        progressView = view.findViewById(android.R.id.progress)
         setProgressVisible(true, false)
 
         listView!!.setOnItemClickListener(

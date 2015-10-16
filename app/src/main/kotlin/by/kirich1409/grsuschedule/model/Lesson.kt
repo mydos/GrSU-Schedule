@@ -2,6 +2,7 @@ package by.kirich1409.grsuschedule.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import by.kirich1409.grsuschedule.schedule.DaySchedule
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
@@ -9,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 /**
  * Created by kirillrozov on 9/13/15.
  */
-public class Lesson : Parcelable {
+public class Lesson : Parcelable, DaySchedule.Item {
 
     @JsonIgnore
     val interval: TimeInterval
@@ -25,6 +26,18 @@ public class Lesson : Parcelable {
 
     @JsonIgnore
     val physicalCulture: Boolean by lazy { "Физическая культура" == title }
+
+    @JsonIgnore
+    val fullAddress: String?
+        get() {
+            return if (address.isNullOrEmpty()) {
+                null
+            } else if (room.isNullOrEmpty()) {
+                address!!
+            } else {
+                "${address!!} - ${room!!}"
+            }
+        }
 
     @JsonCreator
     constructor(
@@ -75,6 +88,9 @@ public class Lesson : Parcelable {
         dest.writeParcelable(department, 0)
     }
 
+    @JsonIgnore
+    override fun getFirstLesson() = this
+
     override fun describeContents(): Int {
         throw UnsupportedOperationException()
     }
@@ -91,7 +107,7 @@ public class Lesson : Parcelable {
 
         public val CREATOR: Parcelable.Creator<Lesson> = object : Parcelable.Creator<Lesson> {
             override fun createFromParcel(source: Parcel) = Lesson(source)
-            override fun newArray(size: Int): Array<Lesson?> = arrayOfNulls(size)
+            override fun newArray(size: Int) = arrayOfNulls<Lesson>(size)
         }
 
         private fun convertType(type: String?): String? {
@@ -103,5 +119,8 @@ public class Lesson : Parcelable {
                 else -> type
             }
         }
+
+        private fun Subgroup?.isNull():
+                Boolean = this == null || (this.id <= 0 && this.title.isEmpty())
     }
 }

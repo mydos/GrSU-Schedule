@@ -5,14 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     >
 
-    <supports-screens
-        android:largeScreens="false"
-        android:normalScreens="true"
-        android:resizeable="false"
-        android:smallScreens="true"
-        android:xlargeScreens="false"
-        />
-
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
@@ -35,6 +27,33 @@
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data android:scheme="http"/>
+                <data android:scheme="https"/>
+
+                <data android:host="mf.grsu.by"/>
+                <data android:host="grsu.by"/>
+                <data android:host="fbe.grsu.by"/>
+                <data android:host="mil.grsu.by"/>
+                <data android:host="psf.grsu.by"/>
+                <data android:host="ftf.grsu.by"/>
+                <data android:host="ffc.grsu.by"/>
+                <data android:host="phf.grsu.by"/>
+                <data android:host="art.grsu.by"/>
+                <data android:host="fp.grsu.by"/>
+                <data android:host="fbt.grsu.by"/>
+                <data android:host="fh.grsu.by"/>
+                <data android:host="lf.grsu.by"/>
+                <data android:host="fit.grsu.by"/>
+                <data android:host="fem.grsu.by"/>
+
+            </intent-filter>
         </activity>
 
         <activity
@@ -42,18 +61,19 @@
             android:label="@string/label_mode_chooser"
             />
 
-        <activity android:name=".student.GroupPickerActivity"/>
+        <activity
+            android:name=".student.GroupPickerActivity"
+            android:label="@string/label_group_picker"
+            />
 
-        <activity android:name=".student.GroupPickerDrawerActivity"/>
+        <activity
+            android:name=".student.GroupChooserActivity"
+            android:label="@string/label_group_picker"
+            />
 
         <activity
             android:name=".teacher.TeacherPickerActivity"
             android:label="@string/label_teachers"
-            />
-
-        <activity
-            android:name=".teacher.TeacherScheduleActivity"
-            android:label="@string/label_teacher_schedule"
             />
 
         <activity
@@ -62,13 +82,14 @@
             />
 
         <activity
-            android:name=".student.GroupScheduleActivity"
-            android:label="@string/label_group_schedule"
+            android:name=".preference.AppSettingsActivity"
+            android:label="@string/settings"
+            android:theme="@style/Theme.GrSUSchedule.ScheduleDisplayPreference"
             />
 
         <activity
-            android:name=".preference.ScheduleDisplayPrefActivity"
-            android:label="@string/label_app_schedule_display_preference"
+            android:name=".AlinementLessonActivity"
+            android:theme="@style/Theme.GrSUSchedule.AlinementLesson"
             />
 
         <service

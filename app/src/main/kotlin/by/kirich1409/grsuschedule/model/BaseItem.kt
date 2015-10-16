@@ -3,6 +3,7 @@ package by.kirich1409.grsuschedule.model
 import android.os.Parcel
 import android.os.Parcelable
 import android.support.annotation.CallSuper
+import by.kirich1409.grsuschedule.utils.Constants
 import java.text.Collator
 import java.util.*
 
@@ -11,7 +12,7 @@ import java.util.*
  */
 abstract class BaseItem(val id: Int, val title: String) : Parcelable, Comparable<BaseItem> {
 
-    constructor(parcel: Parcel):this(parcel.readInt(), parcel.readString())
+    constructor(parcel: Parcel) : this(parcel.readInt(), parcel.readString())
 
     override fun equals(other: Any?): Boolean {
         return when {
@@ -21,21 +22,13 @@ abstract class BaseItem(val id: Int, val title: String) : Parcelable, Comparable
         }
     }
 
-    override fun compareTo(other: BaseItem): Int {
-        return title.compareTo(other.title)
-    }
+    override fun compareTo(other: BaseItem) = title.compareTo(other.title)
 
-    override fun hashCode(): Int {
-        return id
-    }
+    override fun hashCode() = id
 
-    override fun toString(): String {
-        return title
-    }
+    override fun toString() = title
 
-    override fun describeContents(): Int {
-        return 0
-    }
+    override fun describeContents() = 0
 
     @CallSuper
     override fun writeToParcel(dest: Parcel, flags: Int) {
@@ -45,10 +38,8 @@ abstract class BaseItem(val id: Int, val title: String) : Parcelable, Comparable
 
     public class TitleComparator<E : BaseItem> : Comparator<E> {
 
-        val mCollator = Collator.getInstance(Locale("be", "BY"))
+        val сollator = Collator.getInstance(Constants.LOCALE_BY_BE)
 
-        override fun compare(lhs: E, rhs: E): Int {
-            return mCollator.compare(lhs.title, rhs.title)
-        }
+        override fun compare(lhs: E, rhs: E) = сollator.compare(lhs.title, rhs.title)
     }
 }

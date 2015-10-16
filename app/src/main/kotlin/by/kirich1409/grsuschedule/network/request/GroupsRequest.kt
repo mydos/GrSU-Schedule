@@ -7,11 +7,9 @@ import com.octo.android.robospice.request.retrofit.RetrofitSpiceRequest
 /**
  * Created by kirillrozov on 9/13/15.
  */
-public class GroupsRequest(val mDepartmentId: Int, val mFacultyId: Int, val mCourse: Int) :
+public class GroupsRequest(val departmentId: Int, val facultyId: Int, val course: Int) :
         RetrofitSpiceRequest<Groups, ScheduleService>(Groups::class.java, ScheduleService::class.java) {
 
     @Throws(Exception::class)
-    override fun loadDataFromNetwork(): Groups {
-        return service.getGroups(mDepartmentId, mFacultyId, mCourse)
-    }
+    override fun loadDataFromNetwork() = service.getGroups(departmentId, facultyId, course)
 }

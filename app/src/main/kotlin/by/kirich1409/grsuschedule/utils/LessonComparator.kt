@@ -29,7 +29,7 @@ class LessonComparator : Comparator<Lesson> {
 
             val itemsCount = lhsTitleParts.size()
             if (itemsCount > 0 && itemsCount == rhsTitleParts.size()) {
-                for (j in 0..itemsCount - 1) {
+                for (j in 0 until itemsCount) {
                     if (lhsTitleParts[j].isDigitsOnly() && rhsTitleParts[j].isDigitsOnly()) {
                         val compare = lhsTitleParts[j].toInt().compareTo(rhsTitleParts[j].toInt())
                         if (compare != 0) {

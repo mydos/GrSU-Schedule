@@ -7,5 +7,5 @@ import android.view.View
 /**
  * Created by kirillrozov on 9/15/15.
  */
-public open class BaseRecyclerItemViewHolder(protected val context: Context, rootView: View) :
+public open class BaseRecyclerItemViewHolder(val context: Context, rootView: View) :
         RecyclerView.ViewHolder(rootView)

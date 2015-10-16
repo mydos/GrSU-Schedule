@@ -18,4 +18,11 @@ public class TimeTest() {
         Assert.assertEquals(8, time.hours)
         Assert.assertEquals(30, time.minutes)
     }
+
+    @Test
+    public fun testEquals() {
+        val time1 = Time("08:30")
+        val time2 = Time(8, 30)
+        Assert.assertEquals(time2, time1)
+    }
 }

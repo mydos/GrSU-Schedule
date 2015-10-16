@@ -13,13 +13,7 @@ public class TeacherScheduleRequest(val teacherId: Int, startDate: Date?, endDat
 
     @Throws(Exception::class)
     override fun loadDataFromNetwork(): Schedule {
-        if (endDate != null && startDate != null) {
-            return service.getTeacherSchedule(
-                    teacherId, QueryDate(startDate), QueryDate(endDate))
-        } else if (startDate != null) {
-            return service.getTeacherSchedule(teacherId, QueryDate(startDate))
-        } else {
-            return service.getTeacherSchedule(teacherId)
-        }
+        return service.getTeacherSchedule(teacherId,
+                QueryDate.valueOf(startDate), QueryDate.valueOf(endDate))
     }
 }

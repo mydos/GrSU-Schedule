@@ -8,9 +8,9 @@
 
     <by.kirich1409.grsuschedule.widget.RecyclerView
         android:id="@android:id/list"
+        style="@style/Widget.GrSUSchedule.ScheduleRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:overScrollMode="ifContentScrolls"
         />
 
     <com.pnikosis.materialishprogress.ProgressWheel

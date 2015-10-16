@@ -29,7 +29,6 @@
 -dontwarn com.crashlytics.**
 -dontwarn android.support.design.**
 
--keepattributes SourceFile,LineNumberTable,*Annotation*
 -keep class com.crashlytics.android.**
 -keep class retrofit.** { *; }
 -keep class com.fasterxml.jackson.** { *; }
@@ -38,6 +37,7 @@
 -keep class com.squareup.okhttp.** { *; }
 -keep class okio.** { *; }
 -keep class by.kirich1409.grsuschedule.network.QueryDate
+-keep class by.kirich1409.grsuschedule.model.* { *; }
 -keep class android.support.v7.preference.** { *; }
 -keep class android.support.v7.widget.SearchView { *; }
 
@@ -49,6 +49,11 @@
     @com.fasterxml.jackson.annotation.* <init>(...);
 }
 
+-keepattributes SourceFile,LineNumberTable,*Annotation*
 -keepattributes Signature, *Annotation*, EnclosingMethod, InnerClasses
 
 -assumenosideeffects class junit.framework.Assert { *; }
+
+# LeakCanary
+-keep class org.eclipse.mat.** { *; }
+-keep class com.squareup.leakcanary.** { *; }

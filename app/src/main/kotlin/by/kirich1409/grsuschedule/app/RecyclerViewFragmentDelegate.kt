@@ -41,6 +41,11 @@ public class RecyclerViewFragmentDelegate(private val context: Context) {
         set(layoutManager) {
             recyclerView!!.layoutManager = layoutManager
         }
+    var progressVisible: Boolean = true
+        set(visible) {
+            field = visible
+            setProgressVisible(visible)
+        }
 
     fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup): View {
@@ -52,7 +57,11 @@ public class RecyclerViewFragmentDelegate(private val context: Context) {
         emptyView = view.findViewById(android.R.id.empty)
         progressView = view.findViewById(android.R.id.progress)
 
-        recyclerView!!.layoutManager = LinearLayoutManager(context)
+        val recyclerView = recyclerView!!
+        if (recyclerView.layoutManager == null) {
+            recyclerView.layoutManager = LinearLayoutManager(context)
+        }
+
         setProgressVisible(true, false)
     }
 

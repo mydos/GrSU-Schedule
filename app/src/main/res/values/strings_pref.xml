@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="pref_show_empty_lesson_key" translatable="false">showEmptyLessons</string>
     <string name="pref_show_empty_lesson_title">Показывать форточки</string>
     <string name="pref_show_empty_lesson_summary">
         Форточки между занятиями будут показываться как отдельные элементы
     </string>
-    <string name="pref_show_empty_lesson_key" translatable="false">showEmptyLessons</string>
 
-    <string name="pref_only_actual_schedule_title">Только актуальное расписание</string>
+
     <string name="pref_only_actual_schedule_key" translatable="false">onlyActualSchedule</string>
+    <string name="pref_only_actual_schedule_title">Только актуальное расписание</string>
+
+
+    <string name="pref_navigation_mode_key" translatable="false">horizontalNavigation</string>
+    <string name="pref_navigation_mode_title">Режим навигации</string>
+    <string-array name="pref_navigation_mode_entries">
+        <item>Вертикальный</item>
+        <item>Горизонтальный</item>
+    </string-array>
+    <string-array name="pref_navigation_mode_entries_values">
+        <item>2</item>
+        <item>1</item>
+    </string-array>
 </resources>

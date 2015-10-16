@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.res.TypedArray
 import android.support.annotation.ColorInt
 import android.support.annotation.ColorRes
+import android.support.annotation.StyleRes
 import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import by.kirich1409.grsuschedule.R
@@ -14,19 +15,13 @@ import uk.co.androidalliance.edgeeffectoverride.ContextWrapperEdgeEffect
  */
 class RecyclerView : android.support.v7.widget.RecyclerView {
 
-    public constructor(context: Context) : super(ContextWrapperEdgeEffect(context)) {
-        init(context, null, 0)
-    }
+    public constructor(context: Context) : this(context, null)
 
-    public constructor(context: Context, attrs: AttributeSet?) : super(ContextWrapperEdgeEffect(context), attrs) {
-        init(context, attrs, 0)
-    }
+    public constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
 
-    public constructor(context: Context, attrs: AttributeSet?, defStyle: Int) : super(ContextWrapperEdgeEffect(context), attrs, defStyle) {
-        init(context, attrs, defStyle)
-    }
+    public constructor(context: Context, attrs: AttributeSet?, @StyleRes defStyle: Int) :
+            super(ContextWrapperEdgeEffect(context), attrs, defStyle) {
 
-    private fun init(context: Context, attrs: AttributeSet?, defStyle: Int) {
         var color = ContextCompat.getColor(context, R.color.default_edgeeffect_color)
 
         if (attrs != null) {

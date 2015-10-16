@@ -1,8 +1,6 @@
 package by.kirich1409.grsuschedule.preference
 
 import android.content.Context
-import android.content.SharedPreferences
-import android.support.v4.content.SharedPreferencesCompat
 import by.kirich1409.grsuschedule.model.Group
 import by.kirich1409.grsuschedule.model.Teacher
 import by.kirich1409.grsuschedule.utils.APP_MODE_UNKNOWN
@@ -10,17 +8,14 @@ import by.kirich1409.grsuschedule.utils.APP_MODE_UNKNOWN
 /**
  * Created by kirillrozov on 9/14/15.
  */
-public class AppPreference(context: Context) {
+public class AppPreference(private val context: Context) {
 
-    private val preferences: SharedPreferences
-            by lazy { context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE) }
+    private val preferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
 
     var mode: Int
-        @AppMode get() = preferences.getInt(KEY_MODE, APP_MODE_UNKNOWN)
-        set(@AppMode mode) {
-            val editor = preferences.edit()
-            editor.putInt(KEY_MODE, mode)
-            SharedPreferencesCompat.EditorCompat.getInstance().apply(editor)
+        get() = preferences.getInt(KEY_MODE, APP_MODE_UNKNOWN)
+        set(mode) {
+            preferences.edit().putInt(KEY_MODE, mode).apply()
         }
 
     var teacher: Teacher?
@@ -48,7 +43,7 @@ public class AppPreference(context: Context) {
                         .remove(KEY_TEACHER_EMAIL)
                         .remove(KEY_TEACHER_FULL_NAME)
             }
-            SharedPreferencesCompat.EditorCompat.getInstance().apply(editor)
+            editor.apply()
         }
 
     var group: Group?
@@ -70,19 +65,8 @@ public class AppPreference(context: Context) {
                 editor.remove(KEY_GROUP_ID)
                         .remove(KEY_GROUP_TITLE)
             }
-            SharedPreferencesCompat.EditorCompat.getInstance().apply(editor)
+            editor.apply()
         }
-
-
-    public fun registerOnPreferenceChangeListener(
-            listener: SharedPreferences.OnSharedPreferenceChangeListener) {
-        preferences.registerOnSharedPreferenceChangeListener(listener)
-    }
-
-    public fun unregisterOnPreferenceChangeListener(
-            listener: SharedPreferences.OnSharedPreferenceChangeListener) {
-        preferences.unregisterOnSharedPreferenceChangeListener(listener)
-    }
 
     companion object {
         private const val PREF_NAME = "appPref"

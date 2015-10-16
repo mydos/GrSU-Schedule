@@ -2,9 +2,15 @@
 
     <style name="Base.V21.Theme.GrSUSchedule" parent="Base.V7.Theme.GrSUSchedule">
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-    </style>
-
-    <style name="Base.Theme.GrSUSchedule" parent="Base.V21.Theme.GrSUSchedule">
         <item name="shadowVisible">false</item>
     </style>
+
+    <style name="Base.Theme.GrSUSchedule" parent="Base.V21.Theme.GrSUSchedule"/>
+
+    <style name="Base.V21.Theme.GrSUSchedule.Dialog" parent="Base.V7.Theme.GrSUSchedule.Dialog">
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="shadowVisible">false</item>
+    </style>
+
+    <style name="Base.Theme.GrSUSchedule.Dialog" parent="Base.V21.Theme.GrSUSchedule.Dialog"/>
 </resources>

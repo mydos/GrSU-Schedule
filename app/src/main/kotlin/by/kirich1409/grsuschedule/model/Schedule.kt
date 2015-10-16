@@ -8,16 +8,22 @@ import com.fasterxml.jackson.annotation.JsonProperty
 /**
  * Created by kirillrozov on 9/13/15.
  */
-public class Schedule @JsonCreator constructor(@JsonProperty("days") val days: Array<Day>) : Parcelable {
+public class Schedule : Parcelable {
 
-    override fun writeToParcel(dest: Parcel, flags: Int) {
-        dest.writeParcelableArray(days, 0)
+    val days: Array<Day>
+
+    @JsonCreator
+    constructor(@JsonProperty("days") days: Array<Day>) {
+        this.days = days
     }
 
-    constructor(source: Parcel) :
-        this(source.readParcelableArray(Day::class.java.classLoader) as Array<Day>)
+    internal constructor(source: Parcel) {
+        days = source.readParcelableArray(Day::class.java.classLoader) as Array<Day>
+    }
 
-    override fun describeContents(): Int = 0
+    override fun writeToParcel(dest: Parcel, flags: Int) = dest.writeParcelableArray(days, 0)
+
+    override fun describeContents() = 0
 
     companion object {
         public val CREATOR: Parcelable.Creator<Schedule> = object : Parcelable.Creator<Schedule> {

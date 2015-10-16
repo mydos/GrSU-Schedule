@@ -8,7 +8,9 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.KeyEvent
 import android.view.MenuItem
+import by.kirich1409.grsuschedule.BuildConfig
 import by.kirich1409.grsuschedule.R
+import by.kirich1409.grsuschedule.ScheduleApp
 import by.kirich1409.grsuschedule.utils.Constants
 
 /**
@@ -19,13 +21,15 @@ public abstract class BaseActivity : AppCompatActivity() {
     var toolbar: Toolbar? = null
         private set
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    open val screenName: String = javaClass.simpleName
 
+    override fun onCreate(savedInstanceState: Bundle?) {
         val resources = resources
         val configuration = resources.configuration
         configuration.locale = Constants.LOCALE_RU
         resources.updateConfiguration(configuration, resources.displayMetrics)
+
+        super.onCreate(savedInstanceState)
     }
 
     override fun onContentChanged() {
@@ -43,20 +47,20 @@ public abstract class BaseActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.home -> {
-                val upIntent: Intent = NavUtils.getParentActivityIntent(this)
-                if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
-                    TaskStackBuilder.create(this)
-                            .addNextIntentWithParentStack(intent)
-                            .startActivities()
-                } else {
-                    NavUtils.navigateUpTo(this, upIntent)
-                }
-                true
-            }
+            android.R.id.home -> onHomeItemSelected()
             else -> super.onOptionsItemSelected(item)
         }
     }
 
-
+    open fun onHomeItemSelected(): Boolean {
+        val upIntent: Intent = NavUtils.getParentActivityIntent(this)
+        if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
+            TaskStackBuilder.create(this)
+                    .addNextIntentWithParentStack(intent)
+                    .startActivities()
+        } else {
+            NavUtils.navigateUpTo(this, upIntent)
+        }
+        return true
+    }
 }

@@ -15,11 +15,7 @@ abstract class ItemList<E>(val items: Array<E>) {
         }
     }
 
-    override fun hashCode(): Int {
-        return Arrays.hashCode(items)
-    }
+    override fun hashCode() = Arrays.hashCode(items)
 
-    override fun toString(): String {
-        return Arrays.toString(items)
-    }
+    override fun toString() = Arrays.toString(items)
 }
