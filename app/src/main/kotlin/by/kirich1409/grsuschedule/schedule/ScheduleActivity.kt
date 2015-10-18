@@ -41,7 +41,7 @@ public class ScheduleActivity : DrawerActivity(), SharedPreferences.OnSharedPref
 
         setContentView(R.layout.activity_drawer)
         if (savedInstanceState == null) {
-            this.scheduleMode = extractScheduleMode()
+            scheduleMode = extractScheduleMode()
             initContent()
         } else {
             scheduleMode = savedInstanceState.getInt(STATE_SCHEDULE_MODE)

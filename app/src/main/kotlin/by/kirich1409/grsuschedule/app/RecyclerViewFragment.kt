@@ -28,7 +28,7 @@ public open class RecyclerViewFragment : Fragment() {
     var progressVisible: Boolean
         get() = delegate.progressVisible
         set(visible) {
-            delegate.progressVisible = visible
+            setProgressVisible(visible)
         }
 
     override fun onCreateView(
@@ -42,7 +42,7 @@ public open class RecyclerViewFragment : Fragment() {
     }
 
     fun setProgressVisible(visible: Boolean, animate: Boolean = true) {
-        delegate.setProgressVisible(visible)
+        delegate.setProgressVisible(visible, animate)
     }
 
     override fun onDestroyView() {

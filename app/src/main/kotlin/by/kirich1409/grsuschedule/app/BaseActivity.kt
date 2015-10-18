@@ -8,9 +8,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.KeyEvent
 import android.view.MenuItem
-import by.kirich1409.grsuschedule.BuildConfig
 import by.kirich1409.grsuschedule.R
-import by.kirich1409.grsuschedule.ScheduleApp
 import by.kirich1409.grsuschedule.utils.Constants
 
 /**

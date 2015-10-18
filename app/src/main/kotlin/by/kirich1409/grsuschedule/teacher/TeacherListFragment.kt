@@ -152,7 +152,7 @@ public class TeacherListFragment : SimpleSpiceListFragment<Teachers>() {
         }
 
         override fun onLoadFinished(loader: Loader<TeacherAdapter.Data>, data: TeacherAdapter.Data) {
-             listAdapter = TeacherAdapter(context, data)
+            listAdapter = TeacherAdapter(context, data)
         }
 
         override fun onCreateLoader(id: Int, args: Bundle): Loader<TeacherAdapter.Data> {

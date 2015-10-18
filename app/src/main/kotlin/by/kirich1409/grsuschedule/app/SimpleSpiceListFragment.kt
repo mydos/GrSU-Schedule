@@ -59,8 +59,13 @@ abstract class SimpleSpiceListFragment<E> : SpiceListFragment() {
 
     override fun loadData(force: Boolean) {
         setProgressVisible(true)
-        if (force) lastVisiblePosition = -1
-        val duration = if (force) DurationInMillis.ALWAYS_EXPIRED else dataCacheDuration
+        val duration: Long
+        if (force) {
+            lastVisiblePosition = -1
+            duration = DurationInMillis.ALWAYS_EXPIRED
+        } else {
+            duration = dataCacheDuration
+        }
         spiceManager.execute(newSpiceRequest(), cacheKey, duration, requestListener)
     }
 
@@ -100,13 +105,7 @@ abstract class SimpleSpiceListFragment<E> : SpiceListFragment() {
         }
 
         override fun onRequestNotFound() {
-            if (listAdapter == null) {
-                spiceManager.getFromCacheAndLoadFromNetworkIfExpired(
-                        newSpiceRequest(),
-                        cacheKey,
-                        dataCacheDuration,
-                        this)
-            }
+            if (listAdapter == null) loadData(false)
         }
     }
 

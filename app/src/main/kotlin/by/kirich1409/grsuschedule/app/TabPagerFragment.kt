@@ -53,6 +53,7 @@ open class TabPagerFragment : Fragment() {
         tabLayout = view.findViewById(android.R.id.tabs) as TabLayout
         progressView = view.findViewById(android.R.id.progress)
         emptyView = view.findViewById(android.R.id.empty) as TextView?
+
         setProgressVisible(true, false)
         return view
     }

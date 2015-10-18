@@ -4,15 +4,15 @@ import android.content.Context
 import android.support.v4.content.AsyncTaskLoader
 
 public abstract class SimpleAsyncTaskLoader<E>(context: Context) : AsyncTaskLoader<E>(context) {
-    public var data: E? = null
+    public var data: Any? = null
         private set
 
     private var mListenerUnregistered = true
 
     override fun onStartLoading() {
         super.onStartLoading()
-        if (this.data != null) {
-            deliverResult(this.data as E)
+        if (data != null) {
+            deliverResult(data as E)
         } else {
             if (mListenerUnregistered) {
                 registerListeners()
@@ -32,19 +32,13 @@ public abstract class SimpleAsyncTaskLoader<E>(context: Context) : AsyncTaskLoad
 
     override fun deliverResult(data: E) {
         if (isReset) {
-            releaseResources(data)
             return
         }
 
-        val oldData = this.data
         this.data = data
 
         if (isStarted) {
             super.deliverResult(data)
-        }
-
-        if (oldData != null && oldData !== data) {
-            releaseResources(oldData)
         }
     }
 
@@ -56,7 +50,6 @@ public abstract class SimpleAsyncTaskLoader<E>(context: Context) : AsyncTaskLoad
         onStopLoading()
 
         if (data != null) {
-            releaseResources(data as E)
             data = null
         }
 
@@ -70,16 +63,5 @@ public abstract class SimpleAsyncTaskLoader<E>(context: Context) : AsyncTaskLoad
     }
 
     protected open fun unregisterListeners() {
-    }
-
-    override fun onCanceled(data: E?) {
-        super.onCanceled(data)
-        if (data != null) {
-            releaseResources(data)
-        }
-    }
-
-    @SuppressWarnings("Unused")
-    protected fun releaseResources(data: E) {
     }
 }

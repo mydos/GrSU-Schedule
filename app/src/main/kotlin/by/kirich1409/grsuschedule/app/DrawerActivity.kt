@@ -13,9 +13,7 @@ import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import by.kirich1409.grsuschedule.BuildConfig
 import by.kirich1409.grsuschedule.R
-import by.kirich1409.grsuschedule.ScheduleApp
 import by.kirich1409.grsuschedule.preference.AppPreference
 import by.kirich1409.grsuschedule.preference.AppSettingsActivity
 import by.kirich1409.grsuschedule.preference.ModeChooserActivity
@@ -92,7 +90,7 @@ public abstract class DrawerActivity : BaseActivity(),
                 startActivity(Intent(this, AppSettingsActivity::class.java))
             R.id.navigation_change_app_mode -> startModePicker()
         }
-        drawerLayout?.closeDrawers()
+        drawerLayout!!.closeDrawers()
         return true
     }
 

@@ -28,7 +28,7 @@ public class GroupListFragment : SpiceListFragment() {
     private var facultyId: Int = -1
     private var course: Int = -1
     private val groupsRequestListener = GroupsListener()
-    val cacheKey by lazy { "departmentId=$departmentId,facultyId=$facultyId,course=$course" }
+    lateinit var cacheKey: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,10 +36,11 @@ public class GroupListFragment : SpiceListFragment() {
         departmentId = args.getInt(ARG_DEPARTMENT_ID)
         facultyId = args.getInt(ARG_FACULTY_ID)
         course = args.getInt(ARG_COURSE)
+        cacheKey = "departmentId=$departmentId,facultyId=$facultyId,course=$course"
     }
 
     override fun loadData(force: Boolean) {
-        spiceManager.getFromCacheAndLoadFromNetworkIfExpired(
+        spiceManager.execute(
                 GroupsRequest(departmentId, facultyId, course),
                 cacheKey,
                 if (force) DurationInMillis.ALWAYS_EXPIRED else Constants.GROUPS_TIME_CACHE,

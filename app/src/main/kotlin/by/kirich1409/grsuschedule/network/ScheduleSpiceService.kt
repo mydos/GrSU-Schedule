@@ -2,7 +2,6 @@ package by.kirich1409.grsuschedule.network
 
 import android.app.Notification
 import by.kirich1409.grsuschedule.BuildConfig
-import by.kirich1409.grsuschedule.ScheduleApp
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.octo.android.robospice.retrofit.RetrofitJackson2SpiceService

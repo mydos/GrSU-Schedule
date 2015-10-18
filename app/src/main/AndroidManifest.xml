@@ -84,12 +84,12 @@
         <activity
             android:name=".preference.AppSettingsActivity"
             android:label="@string/settings"
-            android:theme="@style/Theme.GrSUSchedule.ScheduleDisplayPreference"
+            android:theme="@style/Theme.GrSUSchedule.Popup"
             />
 
         <activity
             android:name=".AlinementLessonActivity"
-            android:theme="@style/Theme.GrSUSchedule.AlinementLesson"
+            android:theme="@style/Theme.GrSUSchedule.Popup"
             />
 
         <service

@@ -57,7 +57,25 @@ abstract class SchedulePagerFragment : TabPagerFragment(), ScheduleFragmentDeleg
     override fun isNoData() = viewPager?.adapter == null
 
     override fun onDataChanged(data: Array<DaySchedule>) {
-        pagerAdapter = SchedulePagerAdapter(childFragmentManager, data)
+        val count = pagerAdapter?.count ?: -1
+        val fragmentManager = childFragmentManager
+        if (count > 0) {
+            val transaction = fragmentManager.beginTransaction()
+            var fragmentDeleted: Boolean = false
+            for (i in 0 until count) {
+                val name = "android:switcher:" + R.id.pager + ':' + i
+                val fragment = fragmentManager.findFragmentByTag(name)
+                if (fragmentDeleted && fragment == null) {
+                    break
+                } else if (fragment != null) {
+                    transaction.remove(fragment)
+                    fragmentDeleted = true
+                }
+            }
+            transaction.commitAllowingStateLoss()
+        }
+
+        pagerAdapter = SchedulePagerAdapter(fragmentManager, data)
         if (currentPosition >= 0) {
             viewPager!!.currentItem = currentPosition
             currentPosition = -1
