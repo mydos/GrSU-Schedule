@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
 
-    <data>
-        <variable
-            name="freeTime" type="by.kirich1409.grsuschedule.schedule.FreeTime"
-            />
-    </data>
+    <include
+        layout="@layout/lesson_interval"
+        />
 
     <TextView
         android:id="@android:id/text1"
-        style="@style/Widget.GrSUSchedule.FreeTime"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+        style="@style/Schedule.FreeTime"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@{@string/free_time_format(freeTime.interval.startTime, freeTime.interval.endTime)}"
+        android:layout_height="match_parent"
+        android:text="@string/free_time"
         tools:text="Форточка"
         />
-</layout>
+</LinearLayout>

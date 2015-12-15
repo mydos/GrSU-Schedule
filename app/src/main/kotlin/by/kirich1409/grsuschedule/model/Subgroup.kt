@@ -19,9 +19,9 @@ public class Subgroup : BaseItem {
     public constructor(source: Parcel) : super(source)
 
     companion object {
-        public val CREATOR: Parcelable.Creator<Subgroup> = object : Parcelable.Creator<Subgroup> {
+        public val CREATOR = object : Parcelable.Creator<Subgroup> {
             override fun createFromParcel(source: Parcel) = Subgroup(source)
-            override fun newArray(size: Int): Array<Subgroup?> = arrayOfNulls(size)
+            override fun newArray(size: Int) = arrayOfNulls<Subgroup>(size)
         }
     }
 }

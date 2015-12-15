@@ -26,10 +26,11 @@ public class StringUtilsTest() {
     companion object {
 
         public fun data(): Collection<Array<Any>> {
-            return Arrays.asList(*arrayOf(arrayOf<Any>("Test", "TEST", true),
-                    arrayOf<Any>("Test", "", true),
-                    arrayOf<Any>("Test", "R", false),
-                    arrayOf<Any>("R", "Test", false)))
+            return Arrays.asList(*arrayOf(
+                    arrayOf("Test", "TEST", true),
+                    arrayOf("Test", "", true),
+                    arrayOf("Test", "R", false),
+                    arrayOf("R", "Test", false)))
         }
     }
 }

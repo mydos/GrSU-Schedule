@@ -1,23 +1,24 @@
 buildscript {
-    ext.kotlinVersion = '0.14.451'
+    ext.kotlinVersion = "1.0.0-beta-3595"
 
     repositories {
         jcenter()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.4.0-beta6'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}"
-        classpath 'com.android.databinding:dataBinder:1.0-rc4'
+        classpath "com.android.tools.build:gradle:1.5.0"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath "com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.2.1"
     }
 }
 
 ext {
-    supportLibraryVersion = '23.1.0'
+    supportLibraryVersion = '23.1.1'
+    googlePlayServicesVersion = '8.3.0'
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.7'
+    gradleVersion = "2.9"
 }
 
 allprojects {

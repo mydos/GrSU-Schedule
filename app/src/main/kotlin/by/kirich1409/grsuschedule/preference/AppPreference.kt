@@ -35,8 +35,8 @@ public class AppPreference(private val context: Context) {
             if (teacher is Teacher) {
                 editor.putInt(KEY_TEACHER_ID, teacher.id)
                         .putString(KEY_TEACHER_POST, teacher.post)
-                        .putString(KEY_TEACHER_EMAIL, teacher.fullname)
-                        .putString(KEY_TEACHER_FULL_NAME, teacher.fullname)
+                        .putString(KEY_TEACHER_EMAIL, teacher.fullName)
+                        .putString(KEY_TEACHER_FULL_NAME, teacher.fullName)
             } else {
                 editor.remove(KEY_TEACHER_ID)
                         .remove(KEY_TEACHER_POST)

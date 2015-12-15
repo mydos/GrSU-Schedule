@@ -2,4 +2,9 @@
 <resources>
     <integer name="lesson_title_max_lines">2</integer>
     <integer name="schedule_span_count">1</integer>
+
+    <integer name="app_info_google_plus_community">0</integer>
+    <integer name="app_info_build_info">1</integer>
+    <integer name="app_info_beta_test">2</integer>
+    <integer name="app_info_rate_the_app">3</integer>
 </resources>

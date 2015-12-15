@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    style="@style/Widget.GrSUSchedule.LessonContent"
+    style="@style/LessonContent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:ignore="RtlHardcoded,RtlSymmetry"
     >
 
     <by.kirich1409.grsuschedule.widget.RowLayout
@@ -22,7 +21,7 @@
 
             <TextView
                 android:id="@+id/lesson_type"
-                style="@style/Widget.GrSUSchedule.Lesson.Type"
+                style="@style/Lesson.Type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="type"
@@ -30,7 +29,7 @@
 
             <TextView
                 android:id="@+id/lesson_title"
-                style="@style/Widget.GrSUSchedule.Lesson.Title"
+                style="@style/Lesson.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="Lesson name"
@@ -39,10 +38,9 @@
 
         <TextView
             android:id="@+id/lesson_subgroup"
-            style="@style/Widget.GrSUSchedule.Lesson.Subgroup"
+            style="@style/Lesson.Subgroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             tools:text="Subgroup"
             tools:visibility="visible"
             />
@@ -55,7 +53,7 @@
 
         <TextView
             android:id="@+id/lesson_teacher"
-            style="@style/Widget.GrSUSchedule.Lesson.Teacher"
+            style="@style/Lesson.Teacher"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Teacher"
@@ -63,7 +61,7 @@
 
         <TextView
             android:id="@+id/lesson_place"
-            style="@style/Widget.GrSUSchedule.Lesson.Place"
+            style="@style/Lesson.Place"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Place"

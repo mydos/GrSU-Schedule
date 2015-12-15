@@ -15,14 +15,6 @@ public class ScheduleDisplayPreference(private val context: Context) {
     private val preferences: SharedPreferences =
             context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
 
-    var onlyActualSchedule: Boolean
-        get() = preferences.getBoolean(PREF_ONLY_ACTUAL_SCHEDULE, PREF_ONLY_ACTUAL_SCHEDULE_DEFAULT)
-        set(onlyActualSchedule) {
-            preferences.edit()
-                    .putBoolean(PREF_ONLY_ACTUAL_SCHEDULE, onlyActualSchedule)
-                    .apply()
-        }
-
     var showEmptyLesson: Boolean
         get() = preferences.getBoolean(PREF_SHOW_EMPTY_LESSON, PREF_SHOW_EMPTY_LESSON_DEFAULT)
         set(showEmptyLesson) {
@@ -61,11 +53,9 @@ public class ScheduleDisplayPreference(private val context: Context) {
 
     companion object {
         const val PREF_SHOW_EMPTY_LESSON = "showEmptyLesson"
-        const val PREF_ONLY_ACTUAL_SCHEDULE = "onlyActualSchedule"
         val PREF_NAVIGATION_MODE = if (BuildConfig.DEBUG) "navMode" else "a"
 
         private val PREF_NAME = "scheduleDisplayPref"
         private val PREF_SHOW_EMPTY_LESSON_DEFAULT = false
-        private val PREF_ONLY_ACTUAL_SCHEDULE_DEFAULT = true
     }
 }

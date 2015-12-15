@@ -2,7 +2,6 @@ package by.kirich1409.grsuschedule.model
 
 import android.os.Parcel
 import android.os.Parcelable
-import by.kirich1409.grsuschedule.schedule.DaySchedule
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
@@ -14,7 +13,6 @@ public class Lesson : Parcelable, DaySchedule.Item {
 
     @JsonIgnore
     val interval: TimeInterval
-
     val subgroup: Subgroup?
     val teacher: Teacher?
     val type: String?
@@ -22,10 +20,6 @@ public class Lesson : Parcelable, DaySchedule.Item {
     val address: String?
     val room: String?
     val groups: Array<Group>?
-    val department: Department?
-
-    @JsonIgnore
-    val physicalCulture: Boolean by lazy { "Физическая культура" == title }
 
     @JsonIgnore
     val fullAddress: String?
@@ -39,6 +33,16 @@ public class Lesson : Parcelable, DaySchedule.Item {
             }
         }
 
+    val mapAddress: String?
+        get() {
+            return if (address.isNullOrEmpty()) {
+                null;
+            } else {
+                "Беларусь, Гродно, ${address!!}"
+            }
+        }
+
+
     @JsonCreator
     constructor(
             @JsonProperty("timeStart") startTime: String?,
@@ -50,7 +54,6 @@ public class Lesson : Parcelable, DaySchedule.Item {
             @JsonProperty("room") room: String?,
             @JsonProperty("subgroup") subgroup: Subgroup?,
             @JsonProperty("groups") groups: Array<Group>?,
-            @JsonProperty("department") department: Department?,
             @JsonProperty("interval") interval: TimeInterval?) {
 
         this.subgroup = if (subgroup.isNull()) null else subgroup
@@ -60,7 +63,6 @@ public class Lesson : Parcelable, DaySchedule.Item {
         this.address = address
         this.room = if (room.isNullOrEmpty() || room == "-") null else room
         this.groups = groups
-        this.department = department
         this.interval = interval ?: TimeInterval(startTime!!, endTime!!)
     }
 
@@ -72,8 +74,13 @@ public class Lesson : Parcelable, DaySchedule.Item {
         this.address = source.readString()
         this.room = source.readString()
         this.subgroup = source.readParcelable<Subgroup>(Subgroup::class.java.classLoader)
-        this.groups = source.readParcelableArray(Group::class.java.classLoader) as Array<Group>?
-        this.department = source.readParcelable(Department::class.java.classLoader)
+
+        val groupsArray = source.readParcelableArray(Group::class.java.classLoader)
+        if (groupsArray != null) {
+            this.groups = Array(groupsArray.size, { groupsArray[it] as Group })
+        } else {
+            this.groups = null
+        }
     }
 
     override fun writeToParcel(dest: Parcel, flags: Int) {
@@ -85,19 +92,14 @@ public class Lesson : Parcelable, DaySchedule.Item {
         dest.writeString(room)
         dest.writeParcelable(subgroup, 0)
         dest.writeParcelableArray(groups, 0)
-        dest.writeParcelable(department, 0)
     }
 
     @JsonIgnore
     override fun getFirstLesson() = this
 
-    override fun describeContents(): Int {
-        throw UnsupportedOperationException()
-    }
+    override fun describeContents() = 0
 
-    override fun toString(): String {
-        return "'$title', '$type',  $interval"
-    }
+    override fun toString() = "'$title', '$type',  $interval"
 
     companion object {
         /**
@@ -105,14 +107,13 @@ public class Lesson : Parcelable, DaySchedule.Item {
          */
         public val DURATION = 80;
 
-        public val CREATOR: Parcelable.Creator<Lesson> = object : Parcelable.Creator<Lesson> {
+        public val CREATOR = object : Parcelable.Creator<Lesson> {
             override fun createFromParcel(source: Parcel) = Lesson(source)
             override fun newArray(size: Int) = arrayOfNulls<Lesson>(size)
         }
 
         private fun convertType(type: String?): String? {
             return when (type) {
-                null -> null
                 "лек." -> "Лекция"
                 "практ.зан." -> "Практическое занятие"
                 "лаб." -> "Лабораторная"
@@ -120,7 +121,6 @@ public class Lesson : Parcelable, DaySchedule.Item {
             }
         }
 
-        private fun Subgroup?.isNull():
-                Boolean = this == null || (this.id <= 0 && this.title.isEmpty())
+        private fun Subgroup?.isNull() = this == null || (this.id <= 0 && this.title.isEmpty())
     }
 }

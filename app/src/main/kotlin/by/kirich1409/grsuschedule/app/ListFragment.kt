@@ -105,10 +105,6 @@ public open class ListFragment : Fragment() {
     public open fun onListItemClick(l: ListView, v: View, position: Int, id: Long) {
     }
 
-    public fun setSelection(position: Int) = listView!!.setSelection(position)
-    public fun getSelectedItemPosition(): Int = listView!!.selectedItemPosition
-    public fun getSelectedItemId(): Long = listView!!.selectedItemId
-
     public fun showError(exception: Exception) {
         val listAdapter = listAdapter
         if (listAdapter == null || listAdapter.count == 0) {

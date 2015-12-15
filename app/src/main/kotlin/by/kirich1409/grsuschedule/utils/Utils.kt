@@ -1,15 +1,14 @@
 package by.kirich1409.grsuschedule.utils
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.support.annotation.AnimRes
 import android.support.annotation.DrawableRes
 import android.support.annotation.LayoutRes
 import android.support.annotation.StringRes
-import android.support.v4.app.FragmentActivity
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewCompat
 import android.support.v7.app.AppCompatActivity
@@ -24,11 +23,16 @@ import by.kirich1409.grsuschedule.R
 import com.octo.android.robospice.exception.NoNetworkException
 import com.octo.android.robospice.persistence.exception.SpiceException
 import retrofit.RetrofitError
+import kotlin.reflect.KClass
 import android.support.v4.app.Fragment as SupportFragment
 
 /**
  * Created by kirillrozov on 9/15/15.
  */
+
+public fun <T : Activity> Context.startActivity(activityClass: KClass<T>) {
+    startActivity(Intent(this, activityClass.java))
+}
 
 public fun Context.isTablet() = resources.getBoolean(R.bool.is_tablet)
 
@@ -57,10 +61,6 @@ public fun TextView.setTextOrHideIfEmpty(text: CharSequence?) {
     }
 }
 
-public fun AppCompatActivity.setSupportActionBarTitle(title: CharSequence?) {
-    supportActionBar?.title = title
-}
-
 public fun AppCompatActivity.setSupportActionBarTitle(@StringRes titleResId: Int) {
     supportActionBar?.setTitle(titleResId)
 }
@@ -69,34 +69,22 @@ public fun AppCompatActivity.setSupportActionBarSubtitle(subtitle: CharSequence?
     supportActionBar?.subtitle = subtitle
 }
 
-public fun AppCompatActivity.setSupportActionBarSubtitle(@StringRes subtitleResId: Int) {
-    supportActionBar?.setSubtitle(subtitleResId)
-}
-
 public fun Context.inflate(
         @LayoutRes layoutResId: Int, parent: ViewGroup? = null, attachToRoot: Boolean = false): View
         = LayoutInflater.from(this).inflate(layoutResId, parent, attachToRoot)
-
-@Suppress("UNCHECKED_CAST")
-public fun <F : SupportFragment> FragmentActivity.findSupportFragmentByTag(tag: String): F
-        = supportFragmentManager.findFragmentByTag(tag) as F
-
-@Suppress("UNCHECKED_CAST")
-public fun <F : SupportFragment>  FragmentActivity.findSupportFragmentById(id: Int): F
-        = supportFragmentManager.findFragmentById(id) as F
 
 public fun String.startWithIgnoreCase(prefix: CharSequence?): Boolean {
     if (TextUtils.isEmpty(prefix)) {
         return true
     }
 
-    val prefixLength = prefix!!.length()
-    if (length() < prefixLength) {
+    val prefixLength = prefix!!.length
+    if (length < prefixLength) {
         return false
     }
 
     for (i in 0 until prefixLength) {
-        if (Character.toLowerCase(prefix.charAt(i)) != Character.toLowerCase(charAt(i))) {
+        if (Character.toLowerCase(prefix[i]) != Character.toLowerCase(this[i])) {
             return false
         }
     }
@@ -104,12 +92,12 @@ public fun String.startWithIgnoreCase(prefix: CharSequence?): Boolean {
 }
 
 public fun CharSequence.isDigitsOnly(): Boolean {
-    val length = length()
+    val length = length
     if (length == 0) {
         return false;
     } else {
         for (i in 0 until length) {
-            if (!charAt(i).isDigit()) return false
+            if (!this[i].isDigit()) return false
         }
         return true
     }
@@ -119,7 +107,7 @@ public fun Exception.getErrorMessage(context: Context): CharSequence {
     if (this is NoNetworkException) {
         return context.getText(R.string.error_no_network)
     } else if (this is SpiceException) {
-        val cause = getCause()
+        val cause = this.cause
         if (cause is RetrofitError) {
             val response = cause.response
             if (response != null) {
@@ -179,6 +167,3 @@ private class FadeAnimationListener(val view: View, val visible: Boolean) :
 }
 
 public fun Collection<*>?.isNotNullOrEmpty() = this != null && isNotEmpty()
-
-public fun Intent.canHandle(packageManager: PackageManager) =
-        packageManager.queryIntentActivities(this, 0).isNotNullOrEmpty()

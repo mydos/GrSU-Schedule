@@ -7,6 +7,7 @@ import android.support.v4.content.Loader
 import android.support.v4.view.MenuItemCompat
 import android.support.v7.widget.SearchView
 import android.text.InputType
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -18,7 +19,6 @@ import by.kirich1409.grsuschedule.app.SimpleSpiceListFragment
 import by.kirich1409.grsuschedule.model.Teacher
 import by.kirich1409.grsuschedule.model.Teachers
 import by.kirich1409.grsuschedule.network.request.TeachersRequest
-import by.kirich1409.grsuschedule.widget.TeacherAdapter
 import com.octo.android.robospice.persistence.DurationInMillis
 import com.octo.android.robospice.persistence.exception.SpiceException
 
@@ -31,14 +31,13 @@ public class TeacherListFragment : SimpleSpiceListFragment<Teachers>() {
     override val cacheKey = "teachers"
     override val dataClass = Teachers::class.java
     override val dataCacheDuration = DurationInMillis.ONE_DAY * 3
+    private val teacherLoaderCallback = TeacherLoaderCallbacks()
 
     var teachers: Teachers? = null
         set(value) {
             field = value
             activity?.supportInvalidateOptionsMenu()
         }
-
-    val teacherLoaderCallback = TeacherLoaderCallbacks()
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -87,22 +86,29 @@ public class TeacherListFragment : SimpleSpiceListFragment<Teachers>() {
     }
 
     private fun initSearchView(searchView: SearchView) {
-        searchView.queryHint = getText(R.string.search_teachers_hint)
-        searchView.setIconifiedByDefault(true)
-        searchView.inputType = InputType.TYPE_CLASS_TEXT and InputType.TYPE_TEXT_VARIATION_PERSON_NAME
-        searchView.setOnQueryTextListener(TeachersSearchQueryListener())
-        searchView.setOnCloseListener({
-            search("")
-            true
-        })
+        if (isDetached) {
+            Log.d("TeacherListFragment", "Try init search view, after detach")
+        } else {
+            searchView.queryHint = getText(R.string.search_teachers_hint)
+            searchView.setIconifiedByDefault(true)
+            searchView.inputType =
+                    InputType.TYPE_CLASS_TEXT and InputType.TYPE_TEXT_VARIATION_PERSON_NAME
+            searchView.setOnQueryTextListener(TeachersSearchQueryListener())
+            searchView.setOnCloseListener({
+                search("")
+                true
+            })
+        }
     }
 
     protected fun search(query: String) {
         if (teachers != null) {
-            val args = Bundle(2)
-            args.putParcelable(ARG_TEACHERS, teachers)
-            args.putString(ARG_QUERY, query)
-            loaderManager.restartLoader(LOADER_TEACHERS, args, teacherLoaderCallback)
+            loaderManager.restartLoader(LOADER_TEACHERS,
+                    Bundle(2).apply {
+                        putParcelable(ARG_TEACHERS, teachers)
+                        putString(ARG_QUERY, query)
+                    },
+                    teacherLoaderCallback)
         }
     }
 
@@ -147,11 +153,14 @@ public class TeacherListFragment : SimpleSpiceListFragment<Teachers>() {
         }
     }
 
-    private inner class TeacherLoaderCallbacks() : LoaderManager.LoaderCallbacks<TeacherAdapter.Data> {
+    private inner class TeacherLoaderCallbacks() :
+            LoaderManager.LoaderCallbacks<TeacherAdapter.Data> {
+
         override fun onLoaderReset(loader: Loader<TeacherAdapter.Data>) {
         }
 
-        override fun onLoadFinished(loader: Loader<TeacherAdapter.Data>, data: TeacherAdapter.Data) {
+        override fun onLoadFinished(
+                loader: Loader<TeacherAdapter.Data>, data: TeacherAdapter.Data) {
             listAdapter = TeacherAdapter(context, data)
         }
 

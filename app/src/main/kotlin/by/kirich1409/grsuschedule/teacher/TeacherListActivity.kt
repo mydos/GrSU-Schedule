@@ -22,4 +22,6 @@ public class TeacherListActivity : DrawerActivity(), TeacherListFragment.Listene
     override fun onTeacherSelected(teacher: Teacher) {
         startActivity(ScheduleActivity.makeIntent(this, teacher))
     }
+
+    override val screenName = "Teacher List"
 }

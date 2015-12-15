@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
  */
 public class Group : BaseItem {
 
-    val studentsCount: Int
+    val studentCount: Int
     val faculty: Faculty?
     val department: Department?
     val course: Int
@@ -25,14 +25,14 @@ public class Group : BaseItem {
             @JsonProperty("faculty") faculty: Faculty?,
             @JsonProperty("department") department: Department?,
             @JsonProperty("course") course: Int) : super(id, title) {
-        this.studentsCount = studentsCount
+        this.studentCount = studentsCount
         this.faculty = faculty
         this.department = department
         this.course = course
     }
 
     constructor(source: Parcel) : super(source) {
-        studentsCount = source.readInt()
+        studentCount = source.readInt()
         faculty = source.readParcelable<Faculty>(Faculty::class.java.classLoader)
         department = source.readParcelable<Department>(Department::class.java.classLoader)
         course = source.readInt()
@@ -40,22 +40,16 @@ public class Group : BaseItem {
 
     override fun writeToParcel(dest: Parcel, flags: Int) {
         super.writeToParcel(dest, flags)
-        dest.writeInt(studentsCount)
+        dest.writeInt(studentCount)
         dest.writeParcelable(faculty, flags)
         dest.writeParcelable(department, flags)
         dest.writeInt(course)
     }
 
     companion object {
-
-        public val CREATOR: Parcelable.Creator<Group> = object : Parcelable.Creator<Group> {
-            override fun createFromParcel(source: Parcel): Group {
-                return Group(source)
-            }
-
-            override fun newArray(size: Int): Array<Group?> {
-                return arrayOfNulls(size)
-            }
+        public val CREATOR = object : Parcelable.Creator<Group> {
+            override fun createFromParcel(source: Parcel) = Group(source)
+            override fun newArray(size: Int) = arrayOfNulls<Group>(size)
         }
     }
 }

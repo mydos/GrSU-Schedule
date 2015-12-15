@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Widget.GrSUSchedule" parent=""/>
-
     <style name="Base.V7.Widget.GrSUSchedule.Toolbar" parent="Widget.AppCompat.Toolbar">
         <item name="android:id">@id/toolbar</item>
         <item name="popupTheme">@style/ThemeOverlay.GrSUSchedule.Popup</item>
@@ -15,91 +13,91 @@
 
     <style name="Widget.GrSUSchedule.Toolbar" parent="Base.Widget.GrSUSchedule.Toolbar"/>
 
-    <style name="Widget.GrSUSchedule.DayHeader">
-        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Title.Inverse</item>
-        <item name="android:paddingBottom">@dimen/std_margin</item>
-        <item name="android:paddingTop">@dimen/std_margin</item>
-        <item name="android:paddingLeft">@dimen/keyline_1</item>
-        <item name="android:paddingRight">@dimen/keyline_1</item>
-        <item name="android:background">@android:color/darker_gray</item>
+    <style name="Schedule"/>
+
+    <style name="Schedule.DayHeader">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
+        <item name="android:textColor">@android:color/darker_gray</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingRight">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:minHeight">36dp</item>
+        <item name="android:gravity">center_vertical</item>
     </style>
 
-    <style name="Widget.GrSUSchedule.FreeTime">
+    <style name="Schedule.FreeTime">
         <item name="android:paddingBottom">@dimen/std_margin</item>
         <item name="android:paddingTop">@dimen/std_margin</item>
         <item name="android:paddingLeft">@dimen/keyline_1</item>
         <item name="android:paddingRight">@dimen/keyline_1</item>
-        <item name="android:gravity">center</item>
+        <item name="android:gravity">start|center_vertical</item>
         <item name="android:minHeight">?listPreferredItemHeight</item>
-        <item name="android:background">@android:color/darker_gray</item>
-        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Subhead.Inverse</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Title</item>
         <item name="textAllCaps">true</item>
     </style>
 
-    <style name="Widget.GrSUSchedule.Lesson"/>
+    <style name="Lesson"/>
 
-    <style name="Widget.GrSUSchedule.Lesson.TimeDivider">
+    <style name="Lesson.TimeDivider">
         <item name="android:background">@android:color/black</item>
     </style>
 
-    <style name="Widget.GrSUSchedule.Lesson.Time">
+    <style name="Lesson.Time">
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
         <item name="android:textSize">@dimen/lesson_time_text_size</item>
         <item name="android:padding">@dimen/std_margin</item>
         <item name="android:gravity">center_horizontal|center_vertical</item>
     </style>
 
-    <style name="Widget.GrSUSchedule.Lesson.Type">
+    <style name="Lesson.Type">
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Caption</item>
         <item name="android:textColor">?android:textColorSecondary</item>
     </style>
 
-    <style name="Widget.GrSUSchedule.LessonContent">
-        <item name="android:paddingRight">@dimen/margin_8</item>
-        <item name="android:paddingLeft">@dimen/margin_8</item>
+    <style name="LessonContent">
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:paddingLeft">16dp</item>
         <item name="android:paddingTop">@dimen/std_margin</item>
         <item name="android:paddingBottom">@dimen/std_margin</item>
+        <item name="android:minHeight">?listPreferredItemHeight</item>
+        <item name="android:gravity">center_vertical</item>
     </style>
 
-    <style name="Widget.GrSUSchedule.Lesson.Title">
+    <style name="Lesson.Title">
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Subhead</item>
         <item name="android:ellipsize">end</item>
     </style>
 
-    <style name="Widget.GrSUSchedule.Lesson.Place"/>
+    <style name="Lesson.Place"/>
 
-    <style name="Widget.GrSUSchedule.Lesson.Subgroup"/>
+    <style name="Lesson.Subgroup">
+        <item name="android:singleLine">true</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
 
-    <style name="Widget.GrSUSchedule.Lesson.Teacher"/>
+    <style name="Lesson.Teacher"/>
 
-    <style name="Widget.GrSUSchedule.Lesson.Groups"/>
+    <style name="Lesson.Groups"/>
 
-    <style name="Widget.GrSUSchedule.Teacher"/>
+    <style name="Teacher"/>
 
-    <style name="Widget.GrSUSchedule.Teacher.Root">
+    <style name="Teacher.Root">
         <item name="android:background">@style/TextAppearance.AppCompat.Subhead</item>
     </style>
 
-    <!--
-    android:background="?selectableItemBackground"
-    android:gravity="center_vertical"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/std_margin"
-    android:paddingTop="@dimen/std_margin"
-    android:paddingLeft="@dimen/keyline_1"
-    android:paddingRight="@dimen/keyline_1"-->
-
-    <style name="Widget.GrSUSchedule.Teacher.Title">
+    <style name="Teacher.Title">
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Subhead</item>
     </style>
 
-    <style name="Widget.GrSUSchedule.Teacher.Post">
+    <style name="Teacher.Post">
         <item name="android:textColor">?android:textColorSecondary</item>
     </style>
 
     <style name="Base.V7.Widget.GrSUSchedule.ScheduleRecyclerView" parent="">
-        <item name="android:paddingTop">@dimen/margin_16</item>
-        <item name="android:paddingBottom">@dimen/margin_16</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
         <item name="android:clipToPadding">false</item>
         <item name="android:overScrollMode">ifContentScrolls</item>
     </style>
@@ -107,6 +105,18 @@
     <style name="Base.Widget.GrSUSchedule.ScheduleRecyclerView"
            parent="Base.V7.Widget.GrSUSchedule.ScheduleRecyclerView"/>
 
-    <style name="Widget.GrSUSchedule.ScheduleRecyclerView"
+    <style name="ScheduleRecyclerView"
            parent="Base.Widget.GrSUSchedule.ScheduleRecyclerView"/>
+
+    <style name="DayScheduleCard" parent="CardView">
+        <item name="cardElevation">@dimen/day_schedule_card_elevation</item>
+        <item name="cardMaxElevation">@dimen/day_schedule_card_max_elevation</item>
+        <item name="contentPaddingRight">16dp</item>
+        <item name="contentPaddingLeft">16dp</item>
+        <item name="contentPaddingTop">@dimen/std_margin</item>
+        <item name="contentPaddingBottom">@dimen/std_margin</item>
+        <item name="android:minHeight">?listPreferredItemHeight</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="cardUseCompatPadding">true</item>
+    </style>
 </resources>

@@ -30,14 +30,15 @@ public class DepartmentListFragment : SimpleSpiceListFragment<Departments>() {
             this.listener = context
         } else if (BuildConfig.DEBUG) {
             throw RuntimeException(
-                    "Host content must implements DepartmentListFragment.Listener interface.")
+                    "Host context must implements DepartmentListFragment.Listener interface.")
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
         val activity = activity as AppCompatActivity
-        activity.setSupportActionBarTitle(R.string.label_department)
+        activity.setSupportActionBarTitle(R.string.activity_label_department)
         activity.setSupportActionBarSubtitle(null)
     }
 

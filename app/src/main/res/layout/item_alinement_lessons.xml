@@ -6,38 +6,57 @@
     android:layout_height="wrap_content"
     android:background="?selectableItemBackground"
     android:gravity="center_vertical"
+    android:minHeight="?listPreferredItemHeight"
     android:orientation="horizontal"
     tools:ignore="RtlHardcoded,RtlSymmetry"
     >
 
-    <include layout="@layout/item_lesson_time"/>
-
-    <TextView
-        android:id="@+id/lesson_title"
-        style="@style/Widget.GrSUSchedule.Lesson.Title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:paddingLeft="@dimen/std_margin"
-        android:paddingRight="@dimen/std_margin"
-        tools:text="Lesson name"
+    <include
+        layout="@layout/lesson_interval"
         />
 
-    <TextView
-        android:id="@+id/lessons_count"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-        tools:ignore="SpUsage"
-        tools:text="6"
-        />
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        >
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
-        tools:ignore="ContentDescription"
-        />
+        <TextView
+            android:id="@+id/lesson_type"
+            style="@style/Lesson.Type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:text="Lesson type"
+            tools:visibility="visible"
+            />
+
+        <TextView
+            android:id="@+id/lesson_title"
+            style="@style/Lesson.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Lesson name"
+            />
+
+        <TextView
+            android:id="@+id/lesson_subgroups"
+            style="@style/Lesson.Subgroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Group-1, Group-2, Group-3, Group-4, Group-5, Group-6"
+            />
+
+        <TextView
+            android:id="@+id/lesson_place"
+            style="@style/Lesson.Place"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:text="Place"
+            />
+    </LinearLayout>
 
 </LinearLayout>

@@ -10,7 +10,7 @@ import com.octo.android.robospice.SpiceManager
  */
 public abstract class SpiceFragment : Fragment() {
 
-    val spiceManager: SpiceManager = SpiceManager(ScheduleSpiceService::class.java)
+    val spiceManager = SpiceManager(ScheduleSpiceService::class.java)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

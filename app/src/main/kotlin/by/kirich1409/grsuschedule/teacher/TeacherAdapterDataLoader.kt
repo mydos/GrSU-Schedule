@@ -4,7 +4,6 @@ import android.content.Context
 import by.kirich1409.grsuschedule.app.SimpleAsyncTaskLoader
 import by.kirich1409.grsuschedule.model.Teachers
 import by.kirich1409.grsuschedule.utils.startWithIgnoreCase
-import by.kirich1409.grsuschedule.widget.TeacherAdapter
 import java.util.*
 
 /**
@@ -15,7 +14,7 @@ class TeacherAdapterDataLoader(context: Context, val teachers: Teachers, val que
         SimpleAsyncTaskLoader<TeacherAdapter.Data>(context) {
 
     override fun loadInBackground(): TeacherAdapter.Data {
-        val items = teachers.items.filter({ it.fullname.startWithIgnoreCase(query) })
+        val items = teachers.items.filter({ it.fullName.startWithIgnoreCase(query) })
 
         val sectionsCapacity = 30 * 30
 
@@ -25,7 +24,7 @@ class TeacherAdapterDataLoader(context: Context, val teachers: Teachers, val que
 
         var section: Int = 0
         items.forEachIndexed { position, teacher ->
-            val nameFirstChar = teacher.fullname.substring(0, 2)
+            val nameFirstChar = teacher.fullName.substring(0, 2)
             if (sections.isEmpty() || sections.last() !== nameFirstChar) {
                 sections.add(nameFirstChar)
                 section++

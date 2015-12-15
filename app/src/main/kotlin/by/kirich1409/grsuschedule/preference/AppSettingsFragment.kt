@@ -39,25 +39,14 @@ public class AppSettingsFragment : PreferenceFragmentCompat() {
                 }
         )
 
-        initCheckBoxPreference(
-                getText(R.string.pref_only_actual_schedule_key),
-                scheduleDisplayPref!!.onlyActualSchedule,
-                { pref, newValue ->
-                    scheduleDisplayPref!!.onlyActualSchedule = newValue
-                    true
-                }
-        )
-
         val horizontalNavigationPreference =
                 findPreference(getText(R.string.pref_navigation_mode_key)) as ListPreference
         horizontalNavigationPreference.setValueIndex(
                 if (scheduleDisplayPref!!.isHorizontalNavigation) 1 else 0)
         horizontalNavigationPreference.onPreferenceChangeListener =
-                object : Preference.OnPreferenceChangeListener {
-                    override fun onPreferenceChange(preference: Preference, newValue: Any): Boolean {
-                        scheduleDisplayPref!!.navigationMode = newValue.toString().toInt()
-                        return true
-                    }
+                Preference.OnPreferenceChangeListener { preference, newValue ->
+                    scheduleDisplayPref!!.navigationMode = newValue.toString().toInt()
+                    true
                 }
     }
 

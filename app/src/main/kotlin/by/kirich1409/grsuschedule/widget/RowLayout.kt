@@ -12,10 +12,10 @@ import by.kirich1409.grsuschedule.R
  */
 public class RowLayout : ViewGroup {
 
-    var singleLine: Boolean = false
+    var singleLine = false
         private set
 
-    var minHorizontalSpace: Int = 0
+    var minHorizontalSpace = 0
         set(space) {
             field = space
             invalidate()

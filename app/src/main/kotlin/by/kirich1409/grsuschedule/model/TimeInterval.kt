@@ -2,8 +2,7 @@ package by.kirich1409.grsuschedule.model
 
 import android.os.Parcel
 import android.os.Parcelable
-import by.kirich1409.grsuschedule.utils.Constants
-import by.kirich1409.grsuschedule.utils.Time
+import by.kirich1409.grsuschedule.utils.MINUTES_IN_HOUR
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
@@ -11,8 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 /**
  * Created by kirillrozov on 9/18/15.
  */
-public class TimeInterval :
-        Comparable<TimeInterval>, Parcelable {
+public class TimeInterval : Comparable<TimeInterval>, Parcelable {
 
     val startTime: Time
     val endTime: Time
@@ -24,7 +22,7 @@ public class TimeInterval :
     constructor(@JsonProperty("startTime") startTime: Time, @JsonProperty("endTime") endTime: Time) {
         this.startTime = startTime
         this.endTime = endTime
-        durationInMinutes = (endTime.hours - startTime.hours) * Constants.MINUTES_IN_HOUR +
+        durationInMinutes = (endTime.hours - startTime.hours) * MINUTES_IN_HOUR +
                 (endTime.minutes - startTime.minutes)
     }
 
@@ -33,7 +31,7 @@ public class TimeInterval :
     override fun equals(other: Any?): Boolean {
         return when {
             other === this -> true
-            other == null, other.javaClass != TimeInterval::class.java -> false
+            other == null || other.javaClass != TimeInterval::class.java -> false
             other is TimeInterval -> compareTo(other) == 0
             else -> false
         }
@@ -57,12 +55,12 @@ public class TimeInterval :
         dest.writeParcelable(endTime, 0)
     }
 
-    override fun describeContents(): Int = 0
+    override fun describeContents() = 0
 
     companion object {
-        public val CREATOR: Parcelable.Creator<TimeInterval> = object : Parcelable.Creator<TimeInterval> {
-            override fun createFromParcel(source: Parcel): TimeInterval = TimeInterval(source)
-            override fun newArray(size: Int): Array<TimeInterval?> = arrayOfNulls(size)
+        public val CREATOR = object : Parcelable.Creator<TimeInterval> {
+            override fun createFromParcel(source: Parcel) = TimeInterval(source)
+            override fun newArray(size: Int) = arrayOfNulls<TimeInterval>(size)
         }
     }
 }

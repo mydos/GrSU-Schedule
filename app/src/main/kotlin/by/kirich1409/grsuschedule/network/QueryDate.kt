@@ -17,8 +17,7 @@ public class QueryDate(private val date: Date) {
     override fun toString() = dateString
 
     companion object {
-        const val DATE_FORMAT: String = "dd.MM.yyyy"
-        public fun valueOf(date: Date?): QueryDate? = if (date == null) null else QueryDate(date)
-
+        const val DATE_FORMAT = "dd.MM.yyyy"
+        public fun valueOf(date: Date?) = if (date == null) null else QueryDate(date)
     }
 }

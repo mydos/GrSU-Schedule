@@ -3,6 +3,7 @@ package by.kirich1409.grsuschedule.app
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.widget.ListAdapter
+import by.kirich1409.grsuschedule.BuildConfig
 import by.kirich1409.grsuschedule.model.Teachers
 import by.kirich1409.grsuschedule.utils.getErrorMessage
 import com.octo.android.robospice.exception.NoNetworkException
@@ -19,8 +20,9 @@ abstract class SimpleSpiceListFragment<E> : SpiceListFragment() {
     protected abstract val cacheKey: String
     protected abstract val dataClass: Class<E>
     protected open val dataCacheDuration = DurationInMillis.ONE_DAY
-    private val requestListener: PendingRequestListener<E> = DataRequestListener()
-    protected var lastVisiblePosition: Int = -1
+    private val requestListener = DataRequestListener()
+    protected var lastVisiblePosition = -1
+
     override var listAdapter: ListAdapter?
         get() = super.listAdapter
         set(value) {
@@ -31,9 +33,8 @@ abstract class SimpleSpiceListFragment<E> : SpiceListFragment() {
             }
         }
 
-    private fun hasCachedData(): Boolean =
-            spiceManager.isDataInCache(
-                    Teachers::class.java, cacheKey, DurationInMillis.ALWAYS_RETURNED).get()
+    private fun hasCachedData() = spiceManager.isDataInCache(
+            Teachers::class.java, cacheKey, DurationInMillis.ALWAYS_RETURNED).get()
 
     override fun onStart() {
         super.onStart()
@@ -66,7 +67,8 @@ abstract class SimpleSpiceListFragment<E> : SpiceListFragment() {
         } else {
             duration = dataCacheDuration
         }
-        spiceManager.execute(newSpiceRequest(), cacheKey, duration, requestListener)
+        spiceManager.getFromCacheAndLoadFromNetworkIfExpired(
+                newSpiceRequest(), cacheKey, duration, requestListener)
     }
 
     protected abstract fun newSpiceRequest(): SpiceRequest<E>
@@ -100,9 +102,8 @@ abstract class SimpleSpiceListFragment<E> : SpiceListFragment() {
             }
         }
 
-        override fun onRequestSuccess(data: E) {
-            this@SimpleSpiceListFragment.onRequestSuccess(data)
-        }
+        override fun onRequestSuccess(data: E) =
+                this@SimpleSpiceListFragment.onRequestSuccess(data)
 
         override fun onRequestNotFound() {
             if (listAdapter == null) loadData(false)
@@ -110,6 +111,6 @@ abstract class SimpleSpiceListFragment<E> : SpiceListFragment() {
     }
 
     companion object {
-        const val STATE_LIST_POSITION = "listPosition"
+        val STATE_LIST_POSITION = if (BuildConfig.DEBUG) "listPosition" else "a"
     }
 }

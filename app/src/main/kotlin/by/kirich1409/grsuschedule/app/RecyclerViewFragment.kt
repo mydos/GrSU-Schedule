@@ -1,5 +1,6 @@
 package by.kirich1409.grsuschedule.app
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.RecyclerView
@@ -12,41 +13,49 @@ import android.view.ViewGroup
  */
 public open class RecyclerViewFragment : Fragment() {
 
-    private val delegate by lazy { RecyclerViewFragmentDelegate(context) }
+    private var delegate: RecyclerViewFragmentDelegate? = null
+
     var recyclerAdapter: RecyclerView.Adapter<*>?
-        get() = delegate.recyclerAdapter
+        get() = delegate!!.recyclerAdapter
         set(adapter) {
-            delegate.recyclerAdapter = adapter
+            delegate!!.recyclerAdapter = adapter
         }
+
     var layoutManager: RecyclerView.LayoutManager
-        get() = delegate.layoutManager
+        get() = delegate!!.layoutManager
         set(layoutManager) {
-            delegate.layoutManager = layoutManager
+            delegate!!.layoutManager = layoutManager
         }
+
     val recyclerView: RecyclerView?
-        get() = delegate.recyclerView
-    var progressVisible: Boolean
-        get() = delegate.progressVisible
-        set(visible) {
-            setProgressVisible(visible)
-        }
+        get() = delegate!!.recyclerView
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        delegate = RecyclerViewFragmentDelegate(context)
+    }
+
+    override fun onDetach() {
+        delegate = null
+        super.onDetach()
+    }
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle?): View {
-        return delegate.onCreateView(inflater, container)
+        return delegate!!.onCreateView(inflater, container)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        delegate.onViewCreated(view)
+        delegate!!.onViewCreated(view)
     }
 
     fun setProgressVisible(visible: Boolean, animate: Boolean = true) {
-        delegate.setProgressVisible(visible, animate)
+        delegate!!.setProgressVisible(visible, animate)
     }
 
     override fun onDestroyView() {
-        delegate.onDestroyView()
+        delegate!!.onDestroyView()
         super.onDestroyView()
     }
 }

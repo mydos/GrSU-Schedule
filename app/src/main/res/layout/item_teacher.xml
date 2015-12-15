@@ -1,47 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?selectableItemBackground"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/std_margin"
+    android:paddingLeft="@dimen/keyline_1"
+    android:paddingRight="@dimen/keyline_1"
+    android:paddingTop="@dimen/std_margin"
+    >
 
-    <data>
-
-        <variable
-            name="teacher" type="by.kirich1409.grsuschedule.model.Teacher"
-            />
-
-        <import type="android.view.View"/>
-    </data>
-
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <TextView
+        android:id="@+id/teacher_name"
+        style="@style/Teacher.Title"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?selectableItemBackground"
-        android:gravity="center_vertical"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/std_margin"
-        android:paddingLeft="@dimen/keyline_1"
-        android:paddingRight="@dimen/keyline_1"
-        android:paddingTop="@dimen/std_margin"
-        >
+        android:layout_height="wrap_content"
+        tools:text="Mr. Smith"
+        />
 
-        <TextView
-            android:id="@+id/teacher_name"
-            style="@style/Widget.GrSUSchedule.Teacher.Title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{teacher.fullname}"
-            tools:text="Mr. Smith"
-            />
+    <TextView
+        android:id="@+id/teacher_post"
+        style="@style/Teacher.Post"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Professor"
+        />
 
-        <TextView
-            android:id="@+id/teacher_post"
-            style="@style/Widget.GrSUSchedule.Teacher.Post"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{teacher.post}"
-            android:visibility="@{teacher.post != null ? View.VISIBLE : View.GONE}"
-            tools:text="Professor"
-            />
-
-    </LinearLayout>
-</layout>
+</LinearLayout>

@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:locale="ru">
+
     <string name="pref_show_empty_lesson_key" translatable="false">showEmptyLessons</string>
     <string name="pref_show_empty_lesson_title">Показывать форточки</string>
     <string name="pref_show_empty_lesson_summary">
         Форточки между занятиями будут показываться как отдельные элементы
     </string>
-
-
-    <string name="pref_only_actual_schedule_key" translatable="false">onlyActualSchedule</string>
-    <string name="pref_only_actual_schedule_title">Только актуальное расписание</string>
-
 
     <string name="pref_navigation_mode_key" translatable="false">horizontalNavigation</string>
     <string name="pref_navigation_mode_title">Режим навигации</string>
@@ -21,4 +19,20 @@
         <item>2</item>
         <item>1</item>
     </string-array>
+
+    <string name="pref_google_plus_community_title">Сообщество в Google+</string>
+    <string name="pref_google_plus_community_summary">Обсуждение функционала приложения, участие в бета тестирование</string>
+    <string name="pref_google_plus_community_key" translatable="false">plus_community</string>
+    <string name="pref_google_plus_community_link" translatable="false">https://plus.google.com/communities/112441676865434095426</string>
+
+    <string name="pref_google_build_info_title">Информация о версии</string>
+
+    <string name="pref_google_rate_app_key" translatable="false">rate_app</string>
+    <string name="pref_google_rate_app_title">Оценить приложение</string>
+
+    <string name="pref_app_version_key" translatable="false">app_version</string>
+    <string name="pref_app_version_title">Версия приложения</string>
+
+    <string name="pref_app_build_key" translatable="false">app_build</string>
+    <string name="pref_app_build_title">Сборка приложения</string>
 </resources>

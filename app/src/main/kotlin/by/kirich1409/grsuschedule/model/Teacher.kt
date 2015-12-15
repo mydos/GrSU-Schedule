@@ -13,7 +13,7 @@ public class Teacher : Parcelable {
     val id: Int
     val post: String?
     val email: String?
-    val fullname: String
+    val fullName: String
 
     @JsonCreator
     public constructor(
@@ -27,38 +27,37 @@ public class Teacher : Parcelable {
         this.id = id
         this.post = post
         this.email = email
-        this.fullname = fullname ?: "$surname $name $patronym"
+        this.fullName = fullname ?: "$surname $name $patronym"
     }
 
+    public constructor(id: Int, fullName: String?)
+    : this(id, null, null, null, null, null, fullName)
+
     public constructor(id: Int, post: String?, email: String?, fullName: String?)
-        : this(id, null, null, null, post, email, fullName)
+    : this(id, null, null, null, post, email, fullName)
 
     constructor(source: Parcel) {
         id = source.readInt()
         post = source.readString()
         email = source.readString()
-        fullname = source.readString()
+        fullName = source.readString()
     }
 
-    override fun toString(): String {
-        return fullname
-    }
+    override fun toString() = fullName
 
-    override fun describeContents(): Int {
-        return 0
-    }
+    override fun describeContents() = 0
 
     override fun writeToParcel(dest: Parcel, flags: Int) {
         dest.writeInt(id)
         dest.writeString(post)
         dest.writeString(email)
-        dest.writeString(fullname)
+        dest.writeString(fullName)
     }
 
     companion object {
-        public val CREATOR: Parcelable.Creator<Teacher> = object : Parcelable.Creator<Teacher> {
-            override fun createFromParcel(source: Parcel): Teacher = Teacher(source)
-            override fun newArray(size: Int): Array<Teacher?> = arrayOfNulls(size)
+        public val CREATOR = object : Parcelable.Creator<Teacher> {
+            override fun createFromParcel(source: Parcel) = Teacher(source)
+            override fun newArray(size: Int) = arrayOfNulls<Teacher>(size)
         }
     }
 }

@@ -10,7 +10,7 @@ abstract class ItemList<E>(val items: Array<E>) {
     override fun equals(other: Any?): Boolean {
         return when {
             this === other -> true
-            other == null, javaClass != other.javaClass -> false
+            other == null || javaClass != other.javaClass -> false
             else -> Arrays.equals(items, (other as ItemList<*>).items)
         }
     }

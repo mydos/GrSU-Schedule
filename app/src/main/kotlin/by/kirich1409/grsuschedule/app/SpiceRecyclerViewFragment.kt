@@ -13,17 +13,21 @@ public open class SpiceRecyclerViewFragment : SpiceFragment() {
 
     val recyclerView: RecyclerView?
         get() = delegate.recyclerView
+
     private val delegate by lazy { RecyclerViewFragmentDelegate(context) }
+
     var recyclerAdapter: RecyclerView.Adapter<*>?
         get() = delegate.recyclerAdapter
         set(adapter) {
             delegate.recyclerAdapter = adapter
         }
+
     var layoutManager: RecyclerView.LayoutManager
         get() = delegate.layoutManager
         set(layoutManager) {
             delegate.layoutManager = layoutManager
         }
+
     var progressVisible: Boolean
         get() = delegate.progressVisible
         set(visible) {

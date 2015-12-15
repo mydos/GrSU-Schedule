@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import by.kirich1409.grsuschedule.BuildConfig
 import by.kirich1409.grsuschedule.R
+import by.kirich1409.grsuschedule.model.Course
 import by.kirich1409.grsuschedule.model.Department
 import by.kirich1409.grsuschedule.model.Faculty
 import by.kirich1409.grsuschedule.model.Group
@@ -18,9 +19,9 @@ import by.kirich1409.grsuschedule.schedule.ScheduleActivity
  */
 public class GroupPickerActivityDelegate(private val activity: AppCompatActivity) {
 
-    private var mCourseNumber = -1
-    private var mDepartmentId = -1
-    private var mFacultyId = -1
+    private var course = -1
+    private var department: Department? = null
+    private var faculty: Faculty? = null
 
     fun onCreate(savedInstanceState: Bundle?) {
         if (savedInstanceState == null) {
@@ -28,15 +29,15 @@ public class GroupPickerActivityDelegate(private val activity: AppCompatActivity
                     .add(R.id.content, DepartmentListFragment(), FRAGMENT_DEPARTMENTS)
                     .commit()
         } else {
-            mCourseNumber = savedInstanceState.getInt(STATE_COURSE, -1)
-            mDepartmentId = savedInstanceState.getInt(STATE_DEPARTMENT_ID, -1)
-            mFacultyId = savedInstanceState.getInt(STATE_FACULTY_ID, -1)
+            course = savedInstanceState.getInt(STATE_COURSE, -1)
+            department = savedInstanceState.getParcelable(STATE_DEPARTMENT)
+            faculty = savedInstanceState.getParcelable(STATE_FACULTY)
         }
     }
 
     fun onCourseSelected(course: Course) {
-        mCourseNumber = course.number
-        val fragment = GroupListFragment.newInstance(mDepartmentId, mFacultyId, mCourseNumber)
+        this.course = course.number
+        val fragment = GroupListFragment.newInstance(department!!, faculty!!, this.course)
         changeStep(fragment, FRAGMENT_GROUPS)
     }
 
@@ -54,30 +55,32 @@ public class GroupPickerActivityDelegate(private val activity: AppCompatActivity
     }
 
     fun onDepartmentSelected(department: Department) {
-        mDepartmentId = department.id
+        this.department = department
         changeStep(FacultyListFragment(), FRAGMENT_FACULTIES)
     }
 
     fun onFacultySelected(faculty: Faculty) {
-        mFacultyId = faculty.id
+        this.faculty = faculty
         changeStep(CourseListFragment(), FRAGMENT_COURSES)
     }
 
     fun onGroupSelected(group: Group) {
         if (activity.callingActivity != null) {
-            val result = Intent()
-            result.putExtra(EXTRA_GROUP, group)
-            activity.setResult(Activity.RESULT_OK, result)
+            activity.setResult(Activity.RESULT_OK,
+                    Intent().apply { putExtra(EXTRA_GROUP, group) })
             activity.finish()
         } else {
             activity.startActivity(ScheduleActivity.makeIntent(activity, group))
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+                activity.finish();
+            }
         }
     }
 
     fun onSaveInstanceState(outState: Bundle) {
-        outState.putInt(STATE_COURSE, mCourseNumber)
-        outState.putInt(STATE_DEPARTMENT_ID, mDepartmentId)
-        outState.putInt(STATE_FACULTY_ID, mFacultyId)
+        outState.putInt(STATE_COURSE, course)
+        outState.putParcelable(STATE_DEPARTMENT, department)
+        outState.putParcelable(STATE_FACULTY, faculty)
     }
 
     companion object {
@@ -89,7 +92,7 @@ public class GroupPickerActivityDelegate(private val activity: AppCompatActivity
         private val FRAGMENT_COURSES = if (BuildConfig.DEBUG) "courses" else "d"
 
         private val STATE_COURSE = if (BuildConfig.DEBUG) "course" else "a"
-        private val STATE_DEPARTMENT_ID = if (BuildConfig.DEBUG) "departmentId" else "b"
-        private val STATE_FACULTY_ID = if (BuildConfig.DEBUG) "facultyId" else "c"
+        private val STATE_DEPARTMENT = if (BuildConfig.DEBUG) "departmentId" else "b"
+        private val STATE_FACULTY = if (BuildConfig.DEBUG) "facultyId" else "c"
     }
 }

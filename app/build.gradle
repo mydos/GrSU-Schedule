@@ -1,24 +1,58 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'com.android.databinding'
+apply plugin: "com.android.application"
+apply plugin: "kotlin-android"
+apply plugin: "com.getkeepsafe.dexcount"
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "by.kirich1409.grsuschedule"
+        final packageName = "by.kirich1409.grsuschedule"
+        applicationId packageName
         minSdkVersion 10
         targetSdkVersion 23
-        versionCode 22
-        versionName "1.1.0"
+        versionCode 43
+        versionName "1.2.1"
+
+        buildConfigField "boolean", "ANALYTICS_ENABLE", "false"
+        buildConfigField "String", "GA_TRACKER_ID", "\"\""
+        resValue "string", "app_market_link", "market://details?id=$packageName"
     }
 
     buildTypes {
         debug {
-            applicationIdSuffix '.debug'
-            versionNameSuffix '-debug'
+            applicationIdSuffix ".debug"
+            versionNameSuffix "-debug"
         }
+
+        release {
+            minifyEnabled true
+            buildConfigField "boolean", "ANALYTICS_ENABLE", "true"
+            buildConfigField "String", "GA_TRACKER_ID", "\"RELEASE_TRAKER_ID\""
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro", "proguard-donotobfuscate.pro"
+
+        }
+    }
+
+    productFlavors {
+        develop {
+            minSdkVersion 21
+        }
+
+        production
+    }
+
+    variantFilter { variant ->
+        if (variant.flavors[0].name.equals("develop") && "release".equals(variant.buildType.name)) {
+            variant.ignore = true
+        }
+    }
+
+    applicationVariants.all { variant ->
+        final scheduleProviderAuthority = "${variant.applicationId}.schedule"
+        variant.buildConfigField "String", "SCHEDULE_PROVIDER_AUTHORITY", "\"$scheduleProviderAuthority\""
+        variant.resValue "string", "schedule_provider_authority", "$scheduleProviderAuthority"
+        variant.resValue "string", "application_id", "${variant.applicationId}"
     }
 
     testOptions {
@@ -26,10 +60,12 @@ android {
     }
 
     sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
-        debug.java.srcDirs += 'src/debug/kotlin'
-        release.java.srcDirs += 'src/release/kotlin'
-        test.java.srcDirs += 'src/test/kotlin'
+        main.java.srcDirs += "src/main/kotlin"
+        debug.java.srcDirs += "src/debug/kotlin"
+        release.java.srcDirs += "src/release/kotlin"
+        obfuscateTest.java.srcDirs += ["src/obfuscateTest/kotlin", "src/release/kotlin", "src/release/java"]
+        obfuscateTest.res.srcDirs += ["src/release/res"]
+        test.java.srcDirs += "src/test/kotlin"
     }
 
     compileOptions {
@@ -38,33 +74,45 @@ android {
     }
 
     lintOptions {
-        checkReleaseBuilds false
         abortOnError false
+    }
+
+    packagingOptions {
+        exclude "META-INF/LICENSE"
+        exclude "META-INF/LICENSE.txt"
+        exclude "META-INF/NOTICE"
+        exclude "META-INF/NOTICE.txt"
     }
 }
 
+dexcount {
+    includeClasses = false
+    includeFieldCount = false
+    printAsTree = false
+    orderByMethodCount = false
+    verbose = false
+}
+
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}"
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 
-    compile 'com.pnikosis:materialish-progress:1.7'
-    compile 'uk.co.androidalliance:edgeeffectoverride:1.0.2'
-    compile 'com.yqritc:recyclerview-flexibledivider:1.2.5'
+    compile "com.yqritc:recyclerview-flexibledivider:1.2.5"
 
-    compile "com.android.support:cardview-v7:${supportLibraryVersion}"
-    compile "com.android.support:preference-v7:${supportLibraryVersion}"
-    compile "com.android.support:appcompat-v7:${supportLibraryVersion}"
-    compile "com.android.support:design:${supportLibraryVersion}"
-    compile "com.android.support:recyclerview-v7:${supportLibraryVersion}"
+    compile "com.android.support:cardview-v7:$supportLibraryVersion"
+    compile "com.android.support:preference-v7:$supportLibraryVersion"
+    compile "com.android.support:appcompat-v7:$supportLibraryVersion"
+    compile "com.android.support:design:$supportLibraryVersion"
+    compile "com.android.support:recyclerview-v7:$supportLibraryVersion"
+    compile "com.google.android.gms:play-services-analytics:$googlePlayServicesVersion"
 
-    compile('com.squareup.retrofit:converter-jackson:1.9.0') {
-        exclude module: 'gson'
+    compile("com.squareup.retrofit:converter-jackson:1.9.0") {
+        exclude module: "gson"
     }
-    compile('com.octo.android.robospice:robospice-retrofit:1.4.14') {
-        exclude module: 'gson'
+    compile "com.squareup.okhttp:okhttp:2.5.0"
+    compile("com.octo.android.robospice:robospice-retrofit:1.4.14") {
+        exclude module: "gson"
     }
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.6.3'
-    compile 'com.squareup.okhttp:okhttp:2.5.0'
+    compile "com.fasterxml.jackson.core:jackson-databind:2.6.3"
 
-
-    testCompile 'junit:junit:4.12'
+    testCompile "junit:junit:4.12"
 }

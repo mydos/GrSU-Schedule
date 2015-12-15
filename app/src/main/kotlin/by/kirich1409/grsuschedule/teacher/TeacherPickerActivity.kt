@@ -14,6 +14,7 @@ import by.kirich1409.grsuschedule.model.Teacher
 public class TeacherPickerActivity : BaseActivity(), TeacherListFragment.Listener {
 
     private val delegate = TeacherListActivityDelegate(this)
+    override val screenName = "Teacher Picker"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,9 +23,7 @@ public class TeacherPickerActivity : BaseActivity(), TeacherListFragment.Listene
     }
 
     override fun onTeacherSelected(teacher: Teacher) {
-        val result = Intent()
-        result.putExtra(EXTRA_TEACHER, teacher)
-        setResult(Activity.RESULT_OK, result)
+        setResult(Activity.RESULT_OK, Intent().apply { putExtra(EXTRA_TEACHER, teacher) })
         finish()
     }
 

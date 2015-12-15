@@ -18,7 +18,8 @@ public class Schedule : Parcelable {
     }
 
     internal constructor(source: Parcel) {
-        days = source.readParcelableArray(Day::class.java.classLoader) as Array<Day>
+        val days = source.readParcelableArray(Day::class.java.classLoader)
+        this.days = Array(days.size, { days[it] as Day })
     }
 
     override fun writeToParcel(dest: Parcel, flags: Int) = dest.writeParcelableArray(days, 0)
@@ -26,9 +27,9 @@ public class Schedule : Parcelable {
     override fun describeContents() = 0
 
     companion object {
-        public val CREATOR: Parcelable.Creator<Schedule> = object : Parcelable.Creator<Schedule> {
+        public val CREATOR = object : Parcelable.Creator<Schedule> {
             override fun createFromParcel(source: Parcel) = Schedule(source)
-            override fun newArray(size: Int): Array<Schedule?> = arrayOfNulls(size)
+            override fun newArray(size: Int) = arrayOfNulls<Schedule>(size)
         }
     }
 }

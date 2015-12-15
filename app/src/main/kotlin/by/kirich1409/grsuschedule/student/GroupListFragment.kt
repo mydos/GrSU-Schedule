@@ -10,10 +10,12 @@ import android.widget.Toast
 import by.kirich1409.grsuschedule.BuildConfig
 import by.kirich1409.grsuschedule.R
 import by.kirich1409.grsuschedule.app.SpiceListFragment
+import by.kirich1409.grsuschedule.model.Department
+import by.kirich1409.grsuschedule.model.Faculty
 import by.kirich1409.grsuschedule.model.Group
 import by.kirich1409.grsuschedule.model.Groups
 import by.kirich1409.grsuschedule.network.request.GroupsRequest
-import by.kirich1409.grsuschedule.utils.Constants
+import by.kirich1409.grsuschedule.utils.GROUPS_TIME_CACHE
 import com.octo.android.robospice.persistence.DurationInMillis
 import com.octo.android.robospice.persistence.exception.SpiceException
 import com.octo.android.robospice.request.listener.PendingRequestListener
@@ -24,26 +26,26 @@ import com.octo.android.robospice.request.listener.PendingRequestListener
 public class GroupListFragment : SpiceListFragment() {
 
     private var listener: Listener? = null
-    private var departmentId: Int = -1
-    private var facultyId: Int = -1
-    private var course: Int = -1
+    private var department: Department? = null
+    private var faculty: Faculty? = null
+    private var course = -1
     private val groupsRequestListener = GroupsListener()
     lateinit var cacheKey: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val args = arguments
-        departmentId = args.getInt(ARG_DEPARTMENT_ID)
-        facultyId = args.getInt(ARG_FACULTY_ID)
+        department = args.getParcelable(ARG_DEPARTMENT)
+        faculty = args.getParcelable(ARG_FACULTY)
         course = args.getInt(ARG_COURSE)
-        cacheKey = "departmentId=$departmentId,facultyId=$facultyId,course=$course"
+        cacheKey = "departmentId=${department!!.id},facultyId=${faculty!!.id},course=$course"
     }
 
     override fun loadData(force: Boolean) {
-        spiceManager.execute(
-                GroupsRequest(departmentId, facultyId, course),
+        spiceManager.getFromCacheAndLoadFromNetworkIfExpired(
+                GroupsRequest(department!!.id, faculty!!.id, course),
                 cacheKey,
-                if (force) DurationInMillis.ALWAYS_EXPIRED else Constants.GROUPS_TIME_CACHE,
+                if (force) DurationInMillis.ALWAYS_EXPIRED else GROUPS_TIME_CACHE,
                 groupsRequestListener)
     }
 
@@ -53,7 +55,7 @@ public class GroupListFragment : SpiceListFragment() {
             listener = context
         } else if (BuildConfig.DEBUG) {
             throw RuntimeException(
-                    "Host content must implements GroupListFragment.Listener interface.")
+                    "Host context must implements GroupListFragment.Listener interface")
         }
     }
 
@@ -63,7 +65,7 @@ public class GroupListFragment : SpiceListFragment() {
         val activity = activity as AppCompatActivity
         val actionBar = activity.supportActionBar
         if (actionBar != null) {
-            actionBar.title = getText(R.string.label_group)
+            actionBar.title = getText(R.string.activity_label_group)
             actionBar.subtitle = null
         }
     }
@@ -84,9 +86,7 @@ public class GroupListFragment : SpiceListFragment() {
     }
 
     override fun onListItemClick(l: ListView, v: View, position: Int, id: Long) {
-        if (listener != null) {
-            listener!!.onGroupSelected(l.getItemAtPosition(position) as Group)
-        }
+        if (listener != null) listener!!.onGroupSelected(l.getItemAtPosition(position) as Group)
     }
 
     public interface Listener {
@@ -104,25 +104,22 @@ public class GroupListFragment : SpiceListFragment() {
         }
 
         override fun onRequestNotFound() {
-            if (listAdapter == null) {
-                loadData(false)
-            }
+            if (listAdapter == null) loadData(false)
         }
     }
 
     companion object {
         val ARG_COURSE = if (BuildConfig.DEBUG) "course" else "a"
-        val ARG_DEPARTMENT_ID = if (BuildConfig.DEBUG) "departmentId" else "b"
-        val ARG_FACULTY_ID = if (BuildConfig.DEBUG) "facultyId" else "c"
+        val ARG_DEPARTMENT = if (BuildConfig.DEBUG) "department" else "b"
+        val ARG_FACULTY = if (BuildConfig.DEBUG) "faculty" else "c"
 
-        public fun newInstance(departmentId: Int, facultyId: Int, course: Int): GroupListFragment {
-            val args = Bundle(3)
-            args.putInt(ARG_COURSE, course)
-            args.putInt(ARG_DEPARTMENT_ID, departmentId)
-            args.putInt(ARG_FACULTY_ID, facultyId)
-
+        public fun newInstance(department: Department, faculty: Faculty, course: Int): GroupListFragment {
             val fragment = GroupListFragment()
-            fragment.arguments = args
+            fragment.arguments = Bundle(3).apply {
+                putInt(ARG_COURSE, course)
+                putParcelable(ARG_DEPARTMENT, department)
+                putParcelable(ARG_FACULTY, faculty)
+            }
             return fragment
         }
     }

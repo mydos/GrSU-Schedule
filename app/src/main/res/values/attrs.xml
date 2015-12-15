@@ -5,6 +5,11 @@
         <attr name="shadowVisible" format="boolean"/>
     </declare-styleable>
 
+    <declare-styleable name="DrawShadowLinearLayout">
+        <attr name="shadowDrawable"/>
+        <attr name="shadowVisible"/>
+    </declare-styleable>
+
     <declare-styleable name="RowLayout">
         <attr name="minHorizontalSpace" format="dimension"/>
     </declare-styleable>

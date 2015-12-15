@@ -22,10 +22,13 @@ open class TabPagerFragment : Fragment() {
 
     protected var tabLayout: TabLayout? = null
         private set
+
     protected var viewPager: ViewPager? = null
         private set
+
     protected var progressView: View? = null
         private set
+
     protected var emptyView: TextView? = null
         private set
 

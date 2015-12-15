@@ -3,6 +3,7 @@ package by.kirich1409.grsuschedule.student
 import android.os.Bundle
 import by.kirich1409.grsuschedule.R
 import by.kirich1409.grsuschedule.app.DrawerActivity
+import by.kirich1409.grsuschedule.model.Course
 import by.kirich1409.grsuschedule.model.Department
 import by.kirich1409.grsuschedule.model.Faculty
 import by.kirich1409.grsuschedule.model.Group
@@ -42,4 +43,6 @@ public class GroupChooserActivity() : DrawerActivity(),
         super.onSaveInstanceState(outState)
         delegate.onSaveInstanceState(outState)
     }
+
+    override val screenName = "Group chooser"
 }

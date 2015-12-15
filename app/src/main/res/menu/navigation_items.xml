@@ -1,34 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:id="@+id/navigation_sections">
+    <group android:id="@+id/navigation_group_sections">
         <item
             android:id="@+id/navigation_my_schedule"
             android:icon="@drawable/ic_home_black_24dp"
-            android:title="@string/navigation_my_schedule"/>
+            android:title="@string/navigation_my_schedule"
+            />
         <item
             android:id="@+id/navigation_groups"
             android:icon="@drawable/ic_people_black_24dp"
-            android:title="@string/navigation_student_schedule"/>
+            android:title="@string/navigation_student_schedule"
+            />
         <item
             android:id="@+id/navigation_teachers"
             android:icon="@drawable/ic_person_black_24dp"
-            android:title="@string/navigation_teachers_schedule"/>
+            android:title="@string/navigation_teachers_schedule"
+            />
+        <item
+            android:id="@+id/navigation_favourites"
+            android:icon="@drawable/ic_star_24dp"
+            android:title="@string/navigation_favourites"
+            />
     </group>
 
-    <group android:id="@+id/navigation_settings">
+    <group android:id="@+id/navigation_group_settings">
+        <item
+            android:id="@+id/navigation_feedback"
+            android:icon="@drawable/ic_mail_24dp"
+            android:title="@string/navigation_feedback"
+            />
+
         <item
             android:id="@+id/navigation_share_app"
             android:icon="@drawable/ic_shop_black_24dp"
-            android:title="@string/navigation_share_app"/>
+            android:title="@string/navigation_share_app"
+            />
 
         <item
-            android:id="@+id/navigation_change_app_mode"
-            android:icon="@drawable/ic_account_circle_black_24px"
-            android:title="@string/change_app_mode"/>
-
-        <item
-            android:id="@+id/navigation_schedule_preferences"
+            android:id="@+id/navigation_settings"
             android:icon="@drawable/ic_settings_black_24dp"
-            android:title="@string/settings"/>
+            android:title="@string/settings"
+            />
     </group>
 </menu>

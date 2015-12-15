@@ -1,5 +1,6 @@
 package by.kirich1409.grsuschedule.utils
 
+import by.kirich1409.grsuschedule.model.LocalDate
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.Assert
 import org.junit.Test
@@ -15,6 +16,7 @@ import java.util.*
 public class LocalDateTest() {
 
     @Test
+    @Throws(Exception::class)
     public fun testToDate() {
         val dayOfMonth = 12
         val month = 12
@@ -28,6 +30,7 @@ public class LocalDateTest() {
     }
 
     @Test
+    @Throws(Exception::class)
     public fun testJSONMapping() {
         val dayOfMonth = 12
         val month = 12

@@ -23,6 +23,7 @@ public class RecyclerViewFragmentDelegate(private val context: Context) {
 
     private var emptyView: View? = null
     private var progressView: View? = null
+
     var recyclerAdapter: RecyclerView.Adapter<*>?
         get() {
             return recyclerView!!.adapter
@@ -36,19 +37,20 @@ public class RecyclerViewFragmentDelegate(private val context: Context) {
                 emptyView.setDrawableTop(null)
             }
         }
+
     var layoutManager: RecyclerView.LayoutManager
         get() = recyclerView!!.layoutManager
         set(layoutManager) {
             recyclerView!!.layoutManager = layoutManager
         }
+
     var progressVisible: Boolean = true
         set(visible) {
             field = visible
             setProgressVisible(visible)
         }
 
-    fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup): View {
+    fun onCreateView(inflater: LayoutInflater, container: ViewGroup): View {
         return inflater.inflate(R.layout.fragment_recycler_view, container, false)
     }
 

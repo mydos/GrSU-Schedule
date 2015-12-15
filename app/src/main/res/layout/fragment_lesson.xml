@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:overScrollMode="ifContentScrolls"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:scrollbars="none"
+    tools:ignore="RtlHardcoded"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        >
+
+        <LinearLayout
+            android:id="@+id/teacher_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/std_margin_large"
+            android:background="?selectableItemBackground"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/view_min_size"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/std_margin"
+            android:paddingRight="@dimen/std_margin"
+            >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:id="@+id/label_teacher"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:labelFor="@+id/teacher"
+                    android:text="@string/label_teacher"
+                    android:textAppearance="@style/TextAppearance.Design.Hint"
+                    />
+
+                <TextView
+                    android:id="@id/teacher"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    tools:text="Mr Smith"
+                    />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="6dp"
+                android:src="@drawable/ic_schedule_24dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/address_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/std_margin_large"
+            android:background="?selectableItemBackground"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/view_min_size"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/std_margin"
+            android:paddingRight="@dimen/std_margin"
+            >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:id="@+id/label_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:labelFor="@+id/address"
+                    android:text="@string/label_address"
+                    android:textAppearance="@style/TextAppearance.Design.Hint"
+                    />
+
+                <TextView
+                    android:id="@id/address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    tools:text="Main Street 22"
+                    />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:src="@drawable/ic_map_24dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/subgroup_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/std_margin_large"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/view_min_size"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/std_margin"
+            android:paddingRight="@dimen/std_margin"
+            >
+
+            <TextView
+                android:id="@+id/label_subgroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:labelFor="@+id/subgroup"
+                android:text="@string/label_subgroup"
+                android:textAppearance="@style/TextAppearance.Design.Hint"
+                />
+
+            <TextView
+                android:id="@id/subgroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                tools:text="Subgroup-1"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/groups_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/std_margin_large"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/view_min_size"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/std_margin"
+            android:paddingRight="@dimen/std_margin"
+            >
+
+            <TextView
+                android:id="@+id/label_groups"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:labelFor="@+id/groups"
+                android:text="@string/label_groups"
+                android:textAppearance="@style/TextAppearance.Design.Hint"
+                />
+
+            <TextView
+                android:id="@+id/groups"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                tools:text="Group1, Group2, Group3"
+                />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

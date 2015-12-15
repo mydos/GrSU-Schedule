@@ -1,5 +1,8 @@
 package by.kirich1409.grsuschedule.utils
 
+import by.kirich1409.grsuschedule.model.Time
+import by.kirich1409.grsuschedule.model.TimeInterval
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -12,17 +15,43 @@ import org.junit.runners.JUnit4
 public class TimeTest() {
 
     @Test
+    @Throws(Exception::class)
+    public fun testEquals() {
+        val time = Time(8, 30)
+        val timeDuplicate = Time(time.hours, time.hours)
+        Assert.assertEquals(time, timeDuplicate)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    public fun testDeserialization() {
+        val time = Time(8, 30)
+        val json = """{
+                "hours" : ${time.hours},
+                "minutes" : ${time.minutes}
+        }"""
+        val parsedInterval = ObjectMapper().readValue(json, TimeInterval::class.java)
+        Assert.assertEquals(time, parsedInterval)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    public fun testSerialization() {
+        val time = Time(8, 30)
+        val outJson = ObjectMapper().writeValueAsString(time)
+        val json = "{" +
+                "\"hours\":${time.hours}," +
+                "\"minutes\":${time.minutes}" +
+                "}"
+        Assert.assertEquals(json, outJson)
+    }
+
+    @Test
+    @Throws(Exception::class)
     public fun testParse() {
         val timeString = "08:30"
         val time = Time(timeString)
         Assert.assertEquals(8, time.hours)
         Assert.assertEquals(30, time.minutes)
-    }
-
-    @Test
-    public fun testEquals() {
-        val time1 = Time("08:30")
-        val time2 = Time(8, 30)
-        Assert.assertEquals(time2, time1)
     }
 }

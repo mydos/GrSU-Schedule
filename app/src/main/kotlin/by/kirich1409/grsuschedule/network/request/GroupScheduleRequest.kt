@@ -1,7 +1,6 @@
 package by.kirich1409.grsuschedule.network.request
 
 
-import by.kirich1409.grsuschedule.model.Schedule
 import by.kirich1409.grsuschedule.network.QueryDate
 import java.util.*
 
@@ -12,8 +11,6 @@ public class GroupScheduleRequest(val groupId: Int, startDate: Date?, endDate: D
         ScheduleRequest(startDate, endDate) {
 
     @Throws(Exception::class)
-    override fun loadDataFromNetwork(): Schedule {
-        return service.getGroupSchedule(groupId,
-                QueryDate.valueOf(startDate), QueryDate.valueOf(endDate))
-    }
+    override fun loadDataFromNetwork() = service.getGroupSchedule(groupId,
+            QueryDate.valueOf(startDate), QueryDate.valueOf(endDate))
 }

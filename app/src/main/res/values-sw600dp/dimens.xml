@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="expanded_toolbar_size">192dp</dimen>
+
+    <dimen name="keyline_1">20dp</dimen>
+    <dimen name="keyline_2">80dp</dimen>
 </resources>

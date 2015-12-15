@@ -27,8 +27,8 @@ class LessonComparator : Comparator<Lesson> {
             val lhsTitleParts = lhs.subgroup.title.split('.')
             val rhsTitleParts = rhs.subgroup.title.split('.')
 
-            val itemsCount = lhsTitleParts.size()
-            if (itemsCount > 0 && itemsCount == rhsTitleParts.size()) {
+            val itemsCount = lhsTitleParts.size
+            if (itemsCount > 0 && itemsCount == rhsTitleParts.size) {
                 for (j in 0 until itemsCount) {
                     if (lhsTitleParts[j].isDigitsOnly() && rhsTitleParts[j].isDigitsOnly()) {
                         val compare = lhsTitleParts[j].toInt().compareTo(rhsTitleParts[j].toInt())

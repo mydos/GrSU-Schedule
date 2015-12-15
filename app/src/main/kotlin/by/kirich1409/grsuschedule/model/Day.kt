@@ -3,7 +3,6 @@ package by.kirich1409.grsuschedule.model
 import android.os.Parcel
 import android.os.Parcelable
 import by.kirich1409.grsuschedule.utils.LessonComparator
-import by.kirich1409.grsuschedule.utils.LocalDate
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 
@@ -25,24 +24,24 @@ public class Day : Iterable<Lesson>, Parcelable {
 
     constructor(source: Parcel) {
         this.date = source.readParcelable(LocalDate::class.java.classLoader)
-        this.lessons = source.readParcelableArray(Lesson::class.java.classLoader) as Array<Lesson>
+
+        val lessonsArray = source.readParcelableArray(Lesson::class.java.classLoader)
+        this.lessons = Array(lessonsArray.size, { lessonsArray[it] as Lesson })
     }
 
-    override fun iterator(): Iterator<Lesson> = lessons.iterator()
+    override fun iterator() = lessons.iterator()
 
     override fun writeToParcel(dest: Parcel, flags: Int) {
         dest.writeParcelable(date, 0)
         dest.writeParcelableArray(lessons, 0)
     }
 
-    override fun describeContents(): Int {
-        throw UnsupportedOperationException()
-    }
+    override fun describeContents() = 0
 
     companion object {
         public val CREATOR: Parcelable.Creator<Day> = object : Parcelable.Creator<Day> {
             override fun createFromParcel(source: Parcel) = Day(source)
-            override fun newArray(size: Int): Array<Day?> = arrayOfNulls(size)
+            override fun newArray(size: Int) = arrayOfNulls<Day>(size)
         }
     }
 }

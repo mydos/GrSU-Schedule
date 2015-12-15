@@ -9,6 +9,7 @@ public abstract class SimpleAsyncTaskLoader<E>(context: Context) : AsyncTaskLoad
 
     private var mListenerUnregistered = true
 
+    @Suppress("UNCHECKED_CAST")
     override fun onStartLoading() {
         super.onStartLoading()
         if (data != null) {

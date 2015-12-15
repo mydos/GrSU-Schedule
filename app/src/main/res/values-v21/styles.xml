@@ -2,7 +2,7 @@
 <resources>
 
     <style name="Base.V21.Widget.GrSUSchedule.Toolbar" parent="Base.V7.Widget.GrSUSchedule.Toolbar">
-        <item name="android:elevation">8dp</item>
+        <item name="android:elevation">@dimen/app_bar_elevation</item>
     </style>
 
     <style name="Base.Widget.GrSUSchedule.Toolbar" parent="Base.V21.Widget.GrSUSchedule.Toolbar"/>

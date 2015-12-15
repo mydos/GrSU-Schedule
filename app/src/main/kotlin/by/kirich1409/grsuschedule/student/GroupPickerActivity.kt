@@ -3,6 +3,7 @@ package by.kirich1409.grsuschedule.student
 import android.os.Bundle
 import by.kirich1409.grsuschedule.R
 import by.kirich1409.grsuschedule.app.BaseActivity
+import by.kirich1409.grsuschedule.model.Course
 import by.kirich1409.grsuschedule.model.Department
 import by.kirich1409.grsuschedule.model.Faculty
 import by.kirich1409.grsuschedule.model.Group
@@ -55,4 +56,6 @@ public class GroupPickerActivity : BaseActivity(),
     companion object{
         val EXTRA_GROUP = GroupPickerActivityDelegate.EXTRA_GROUP
     }
+
+    override val screenName = "Group Picker"
 }

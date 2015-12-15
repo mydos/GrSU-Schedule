@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
 
-    <by.kirich1409.grsuschedule.widget.RecyclerView
+    <android.support.v7.widget.RecyclerView
         android:id="@android:id/list"
-        style="@style/Widget.GrSUSchedule.ScheduleRecyclerView"
+        style="@style/ScheduleRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
 
-    <com.pnikosis.materialishprogress.ProgressWheel
+    <ProgressBar
         android:id="@android:id/progress"
+        style="?android:progressBarStyleLarge"
         android:layout_width="@dimen/progress_size"
         android:layout_height="@dimen/progress_size"
         android:layout_gravity="center"
-        app:matProg_progressIndeterminate="true"
         />
 
     <TextView
@@ -27,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:padding="@dimen/margin_16"
+        android:padding="16dp"
         android:text="@string/schedule_empty"
         android:textAppearance="?android:textAppearanceMedium"
         />

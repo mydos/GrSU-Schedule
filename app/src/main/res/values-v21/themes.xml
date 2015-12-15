@@ -7,8 +7,15 @@
 
     <style name="Base.Theme.GrSUSchedule" parent="Base.V21.Theme.GrSUSchedule"/>
 
+    <style name="Base.V21.Theme.GrSUSchedule.Drawer" parent="Base.V21.Theme.GrSUSchedule">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="Base.Theme.GrSUSchedule.Drawer" parent="Base.V21.Theme.GrSUSchedule.Drawer"/>
+
     <style name="Base.V21.Theme.GrSUSchedule.Dialog" parent="Base.V7.Theme.GrSUSchedule.Dialog">
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="shadowVisible">false</item>
     </style>
 

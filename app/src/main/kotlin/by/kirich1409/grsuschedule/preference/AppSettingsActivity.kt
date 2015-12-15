@@ -11,15 +11,23 @@ public class AppSettingsActivity() : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_schedule_display_pref)
+        setContentView(R.layout.activity_with_toolbar)
 
         val actionBar = supportActionBar
         actionBar.setDisplayHomeAsUpEnabled(true)
         actionBar.setDisplayShowHomeEnabled(true)
+
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                    .add(R.id.content, AppSettingsFragment())
+                    .commit()
+        }
     }
 
     override fun onHomeItemSelected(): Boolean {
         finish()
         return true
     }
+
+    override val screenName = "App Settings"
 }

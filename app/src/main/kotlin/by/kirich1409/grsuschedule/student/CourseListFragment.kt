@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import by.kirich1409.grsuschedule.R
+import by.kirich1409.grsuschedule.model.Course
 import by.kirich1409.grsuschedule.utils.setSupportActionBarSubtitle
 import by.kirich1409.grsuschedule.utils.setSupportActionBarTitle
 
@@ -24,8 +25,15 @@ public class CourseListFragment : ListFragment() {
             mListener = context
         } else {
             throw RuntimeException(
-                    "Host content must implements CoursesFragment.Listener interface.")
+                    "Host context must implements CoursesFragment.Listener interface.")
         }
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        val activity = activity as AppCompatActivity
+        activity.setSupportActionBarTitle(R.string.activity_label_course)
+        activity.setSupportActionBarSubtitle(null)
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
@@ -35,10 +43,6 @@ public class CourseListFragment : ListFragment() {
                 .mapIndexed { index, title -> Course(title, index + 1) }
                 .toTypedArray()
         listAdapter = ArrayAdapter(context, R.layout.simple_list_item_1, courses)
-
-        val activity = activity as AppCompatActivity
-        activity.setSupportActionBarTitle(R.string.label_course)
-        activity.setSupportActionBarSubtitle(null)
     }
 
     override fun onListItemClick(l: ListView, v: View, position: Int, id: Long) {
